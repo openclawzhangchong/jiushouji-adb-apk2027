@@ -1,0 +1,27 @@
+﻿Filesystem               Size     Used     Free   Blksize
+
+/dev                   990.2M    60.0K   990.1M   4096
+
+/sys/fs/cgroup         990.2M    12.0K   990.2M   4096
+
+/mnt/asec              990.2M     0.0K   990.2M   4096
+
+/mnt/obb               990.2M     0.0K   990.2M   4096
+
+/storage/emulated      990.2M     0.0K   990.2M   4096
+
+/system                871.8M   463.4M   408.3M   4096
+
+/data                   13.2G   152.2M    13.1G   4096
+
+/cache                 120.0M    80.0K   119.9M   4096
+
+/protect_f               5.8M    56.0K     5.8M   4096
+
+/protect_s               5.8M    52.0K     5.8M   4096
+
+/mnt/cd-rom              1.2M     1.2M     0.0K   2048
+
+/mnt/shell/emulated     13.2G   152.2M    13.0G   4096
+
+

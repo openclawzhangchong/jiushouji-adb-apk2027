@@ -1,0 +1,43 @@
+﻿rootfs / rootfs ro,seclabel,relatime 0 0
+
+tmpfs /dev tmpfs rw,seclabel,nosuid,relatime,mode=755 0 0
+
+devpts /dev/pts devpts rw,seclabel,relatime,mode=600 0 0
+
+proc /proc proc rw,relatime 0 0
+
+sysfs /sys sysfs rw,seclabel,relatime 0 0
+
+selinuxfs /sys/fs/selinux selinuxfs rw,relatime 0 0
+
+none /acct cgroup rw,relatime,cpuacct 0 0
+
+none /sys/fs/cgroup tmpfs rw,seclabel,relatime,mode=750,gid=1000 0 0
+
+tmpfs /mnt/asec tmpfs rw,seclabel,relatime,mode=755,gid=1000 0 0
+
+tmpfs /mnt/obb tmpfs rw,seclabel,relatime,mode=755,gid=1000 0 0
+
+none /dev/cpuctl cgroup rw,relatime,cpu 0 0
+
+tmpfs /storage/emulated tmpfs rw,seclabel,relatime,mode=755,uid=1023,gid=1023 0 0
+
+/emmc@android /system ext4 ro,seclabel,relatime,data=ordered 0 0
+
+/emmc@usrdata /data ext4 rw,seclabel,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered 0 0
+
+/emmc@cache /cache ext4 rw,seclabel,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered 0 0
+
+/emmc@protect_f /protect_f ext4 rw,seclabel,nosuid,nodev,noatime,nodelalloc,noauto_da_alloc,commit=1,data=ordered 0 0
+
+/emmc@protect_s /protect_s ext4 rw,seclabel,nosuid,nodev,noatime,nodelalloc,noauto_da_alloc,commit=1,data=ordered 0 0
+
+/dev/block/loop0 /mnt/cd-rom iso9660 ro,relatime 0 0
+
+adb /dev/usb-ffs/adb functionfs rw,relatime 0 0
+
+debugfs /sys/kernel/debug debugfs rw,relatime 0 0
+
+/dev/fuse /mnt/shell/emulated fuse rw,nosuid,nodev,relatime,user_id=1023,group_id=1023,default_permissions,allow_other 0 0
+
+

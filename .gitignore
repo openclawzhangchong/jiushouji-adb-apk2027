@@ -1,0 +1,31 @@
+# ---- Windows ----
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ---- 本地 / 临时 ----
+*.tmp
+*.bak
+*~
+~$*
+local/
+*.local.*
+
+# ---- Android / Gradle 构建产物 ----
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk.idsig
+output-metadata.json
+
+# ---- IDE ----
+.idea/
+.vscode/
+*.iml
+*.hprof
+
+# ---- 说明 ----
+# 注意：raw/ 下的真机数据是重要资料，请勿忽略。
+# 提交前请确认 raw/getprop.txt 中的网络信息（IP / DNS / 主机名）已脱敏。
