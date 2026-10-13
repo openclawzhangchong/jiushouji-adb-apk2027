@@ -136,13 +136,60 @@ foreach ($p in @('ro.product.brand','ro.product.model','ro.product.device','ro.b
 
 | 有 | 无 |
 |---|---|
-| `settings` `input` `am` `pm` `screencap` `screenrecord` `dumpsys` `logcat` `monkey` `dpm` `getevent` `sendevent` `setprop` `ps` `top` `ip` `ifconfig` `ping` `netstat` `cp` `mv` `rm` `ls` `date` `reboot` `service` `grep` `awk` | `cmd`（6.0+ 才有）`su` **`sed`** `head` `nproc` `tar` `curl` `wget` `toybox` `busybox` |
+| `settings` `input` `am` `pm` `screencap` `screenrecord` `dumpsys` `grep` `awk` `uiautomator` | `cmd`（6.0+ 才有）`su` **`sed`** `head` `nproc` `tar` `curl` `wget` `toybox` `busybox` |
 
 ⚠️ **注意 `grep` 有、`sed` 没有** —— 这个组合最容易踩坑，
 常见写法 `dumpsys package | sed -n '/x/,/y/p'` 会直接失败。用 `awk` 或 `grep` 替代。
 
 **写脚本前先 `command -v <cmd>` 探一遍**，否则 `dumpsys meminfo | head` 会直接
 `/system/bin/sh: head: not found`。
+
+### ⚠️ 测量方法学（实测踩过的大坑）
+
+**任何"帧率 / 延迟 / 提速"类指标，都不能用 adb 逐条命令去测。**
+
+错误示范（会把大量空闲时间算进统计，得出荒谬结论）：
+
+```powershell
+# ❌ 每次 adb 往返约 1 秒，界面只在稀疏时刻重绘
+1..25 | ForEach-Object { & $adb shell "input swipe 600 640 120 640 120" }
+# → 实测"10-21 FPS"（假象）
+```
+
+正确做法（把负载推到设备本地跑）：
+
+```powershell
+& $adb push "D:\tools\swipe-load.sh" /data/local/tmp/      # 注意用 Windows 路径
+& $adb shell 'sh /data/local/tmp/swipe-load.sh'            # 设备本地连续执行
+& $adb shell 'logcat -b main -d' | Select-String 'SurfaceFlinger.*fps'
+```
+
+→ 同样场景实测 **43–56 FPS**，和"10–21 FPS"差 4 倍。**测量方法错了，结论就全错。**
+
+### ⚠️ 别信 `eval` 测出来的语法支持度
+
+测引擎是否支持某个 JS 语法，**不要用 `eval('let a=1; const b=2;')`**：
+一个语法失败会连坐后面的（实测因 `let` 报错把 `const` 误判为不支持）。
+
+正确做法：用 `new Function(src)` 只测**解析**，且**每个特性单独测**。
+
+### ⚠️ 摘录式采集要标注采集时刻
+
+`getprop` / `dumpsys` 这类快照**只在采集那一刻有效**。
+实测踩过：设备 MAC 在恢复出厂后从 `00:08:22:c6:a2:fb` 变成 `00:08:22:e6:d2:fb`，
+而报告里还留着旧值没人发现。
+
+→ **每次采集都记录时间戳**；报告里的硬件参数要标注"首次采集值"。
+
+### Windows 路径坑（反复踩）
+
+本机 git / adb / aapt2 / d8 都是 Windows 原生程序，**不认 Git Bash 的 `/d/...` 路径**：
+
+- `adb push /tmp/a.txt` → `cannot stat` → 必须用 `D:\...`
+- `git commit -F /d/msg.txt` → `fatal: could not read log file` → 必须用 `D:/...`
+- `git show --name-only` 对中文路径会加引号 + 八进制转义 → 取文件列表要加
+  `git -c core.quotePath=false`
+- `git commit` 之前**必须 `git add -A`**，否则新文件不会进去
 
 ### 别踩的 shell 坑
 
