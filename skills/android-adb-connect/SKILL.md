@@ -136,7 +136,10 @@ foreach ($p in @('ro.product.brand','ro.product.model','ro.product.device','ro.b
 
 | 有 | 无 |
 |---|---|
-| `settings` `input` `am` `pm` `screencap` `screenrecord` `dumpsys` `grep` | `cmd`（6.0+ 才有）`su` `head` `nproc` `tar` `curl` `wget` `toybox` `busybox` |
+| `settings` `input` `am` `pm` `screencap` `screenrecord` `dumpsys` `logcat` `monkey` `dpm` `getevent` `sendevent` `setprop` `ps` `top` `ip` `ifconfig` `ping` `netstat` `cp` `mv` `rm` `ls` `date` `reboot` `service` `grep` `awk` | `cmd`（6.0+ 才有）`su` **`sed`** `head` `nproc` `tar` `curl` `wget` `toybox` `busybox` |
+
+⚠️ **注意 `grep` 有、`sed` 没有** —— 这个组合最容易踩坑，
+常见写法 `dumpsys package | sed -n '/x/,/y/p'` 会直接失败。用 `awk` 或 `grep` 替代。
 
 **写脚本前先 `command -v <cmd>` 探一遍**，否则 `dumpsys meminfo | head` 会直接
 `/system/bin/sh: head: not found`。
@@ -146,22 +149,61 @@ foreach ($p in @('ro.product.brand','ro.product.model','ro.product.device','ro.b
 - Android 的 `sh` 是 mksh/toolbox，**不支持 `(a || b)` 这种括号分组**：
   `cat f 2>/dev/null || echo (always-on)` 会报 `syntax error: 'always-on' unexpected`。
   用 `if` 语句或分开两条命令。
-- `/proc/loadavg` 在旧 MTK 内核（tickless idle + hotplug）上**可能是坏的**：
-  实测连续采样 3 次数值完全不变（7.11/7.15/7.19），而 `top` 显示全进程 0% CPU。
-  **不要用 loadavg 判断负载**，用 `top` 或实际响应速度。
+- **`/proc/loadavg` 基线被内核线程垫高**（MTK 平台常见）：实测恒显示 ≈7，
+  一度误判为「内核计数坏了」。**真相是 7 个内核线程长期处于 `D` 状态**
+  （`wdtk-0~3` / `hang_detect` / `pmic_thread_kth` / `bat_thread_kthr`），
+  它们会被计入 loadavg。
+  → **别读绝对值判断负载**；可以做增量对比，或直接看 `top`。
+  查证方法：
+  ```powershell
+  & $adb shell 'top -n 1 -m 400' | Select-String ' D '   # 看哪些进程长期 D 状态
+  ```
 
-### 多核不等于多核在跑
+### 「只有 1 核在跑」是故障还是省电策略？—— 必须跑负载才能定性
 
-判定真实可用核心要读 sysfs，不要数 `cpuinfo`：
+**别看到 `online = 0` 就说性能差或硬件有问题。** 先读 sysfs：
 
 ```
-cat /sys/devices/system/cpu/present   # 硬件有几个，如 0-3
-cat /sys/devices/system/cpu/online    # 实际在线的，如 0  <- 可能只剩 1 个
-cat /sys/devices/system/cpu/cpu1/online   # 0 = 该核被关
+cat /sys/devices/system/cpu/present        # 硬件有几个，如 0-3
+cat /sys/devices/system/cpu/online         # 实际在线的，如 0
+cat /sys/devices/system/cpu/cpu1/online    # 0 = 该核被关
 ```
 
-MTK 的 `hotplug` governor 空闲时会关核，**某些 ODM 固件只留 1 核**。
-`cpuinfo` 的 processor 行数还会因输出截断而数不准，别用它下结论。
+然后**施加负载再读一次**。有负载时核数回升 = hotplug 正常，纯省电策略。
+
+```powershell
+# 1) 推测试脚本到设备（多行脚本走文件，避免引号地狱）
+& $adb push tools/cpu-hotplug-test.sh /data/local/tmp/
+# 2) 跑
+& $adb shell sh /data/local/tmp/cpu-hotplug-test.sh
+```
+
+脚本逻辑：起 8 个忙循环 → `sleep 4` 读 online → `sleep 6` 再读 → kill 后再读。
+
+**实测参考（MT6582 / Android 5.1）**：
+
+| 状态 | online | 频率 |
+|---|---|---|
+| 空闲 | `0` | 598 MHz |
+| 负载 4 s 后 | `0-3` ← **4 核全开** | 1300 MHz |
+| 释放负载后 | `0-2` ← 逐步关核 | 598 MHz |
+
+再读 governor 参数定性：
+
+```powershell
+& $adb shell 'HP=/sys/devices/system/cpu/cpufreq/hotplug; for p in is_cpu_hotplug_disable cpu_num_limit cpu_num_base cpu_up_threshold cpu_rush_boost_num cpu_input_boost_num; do echo "$p = $(cat $HP/$p 2>/dev/null)"; done'
+```
+
+- `is_cpu_hotplug_disable = 0` → 热插拔开着
+- `cpu_num_limit = 4` → 上限 4 核
+- `cpu_num_base` 为 1 → 空闲最少留 1 核（正常）
+
+**判定**：核数随负载变化 = 正常省电策略；负载下仍不回升 = 真有问题（内核禁用或 ODM 锁死）。
+
+**给开发的提醒**：即使 4 核可用，**冷启动阶段通常仍是 1 核**（还没达到 `cpu_up_threshold`），
+所以启动路径要按单核设计。
+
+> `cpuinfo` 的 processor 行数会因输出截断而数不准，**别用它下结论**。
 
 ### 第 5 步（可选）：设备画像 / 识别白牌机
 
@@ -215,19 +257,51 @@ MTK 的 `hotplug` governor 空闲时会关核，**某些 ODM 固件只留 1 核*
 # pm 支持哪些子命令（5.1 上【没有】 set-home-activity）
 & $adb shell pm
 
+# ★ 关键：shell 到底被授予了哪些权限（决定哪些操作可行）
+& $adb shell "dumpsys package com.android.shell" |
+    Select-String 'android.permission' | Sort-Object -Unique
+
 # 屏幕超时（做常亮要改）
 & $adb shell "settings get system screen_off_timeout"
 ```
 
-**Android 5.1 上的关键结论（实测）**：
+**Android 5.1 上的关键结论（全部实测）**：
 
 | 结论 | 影响 |
 |---|---|
 | **没有 `cmd` 命令**（6.0 才引入） | `cmd package set-home-activity` 用不了，只能用 `pm` / `am` |
-| **`pm` 没有 `set-home-activity`** | 换桌面得靠声明 HOME + `am start` 触发选择器，或 `pm disable-user` 原桌面 |
-| **`dpm` 存在** | 可 `dpm set-device-owner <组件>` 做真正的 Kiosk 锁定 |
+| **`pm` 没有 `set-home-activity`** | 无法用命令行直接指定默认桌面 |
+| **`pm disable-user` 全部失败** | shell **没有** `CHANGE_COMPONENT_ENABLED_STATE` → **无法禁用原桌面** |
+| **`dpm` 存在且权限可用** | shell **有** `MANAGE_DEVICE_ADMINS` → `dpm set-device-owner` 可行 |
 | `dpm set-device-owner` 要求设备无已登录账号 | **趁设备还是全新的时候做，登录账号后就设不了了** |
 | **应用装完处于 `stopped` 状态** | 收不到 `BOOT_COMPLETED`，**必须 `am start` 启动一次**才能自启 |
+
+#### 两个「零风险试探权限」的技巧（很实用，值得记）
+
+想知道某操作**能不能做**，又不想真的改动设备，用不存在的目标去试探——
+错误信息会告诉你卡在权限还是卡在目标：
+
+```powershell
+# 试探 pm disable-user：包不存在 → 报 Unknown package（说明先查包再查权限）
+& $adb shell pm disable-user --user 0 com.example.fake
+#   Error: java.lang.IllegalArgumentException: Unknown package: com.example.fake
+
+# 用真实存在但无害的包试探（推荐！比拿目标包试安全）
+& $adb shell pm disable-user --user 0 com.android.galaxy4     # 动态壁纸，无副作用
+#   Error: java.lang.SecurityException: Permission Denial:
+#          attempt to change component state from pid=..., uid=2000   ← 权限不足，实锤
+
+# 试探 dpm set-device-owner：组件不存在 → 报 Unknown admin（说明权限检查已通过）
+& $adb shell dpm set-device-owner com.example.fake/.FakeReceiver
+#   Error: Unknown admin: ComponentInfo{com.example.fake/...}          ← 权限 OK，只是组件不存在
+```
+
+**判读规则**：
+- 报 `SecurityException: Permission Denial` → **权限不够**，此路不通
+- 报 `Unknown package` / `Unknown admin` / `Unknown component` → **权限够了**，只是目标不存在 → 换真目标就能成
+
+**优先用无害包试探**（动态壁纸、演示用包），别拿真正要动的目标去试。
+试探完记得把无害包恢复原状（本例中它本来就没被改成功）。
 
 ### 屏幕朝向与传感器坐标系
 
