@@ -48,9 +48,9 @@
 
 [dhcp.ipv6.wlan0.result]: []
 
-[dhcp.wlan0.dns1]: [REDACTED]
+[dhcp.wlan0.dns1]: [58.22.96.66]
 
-[dhcp.wlan0.dns2]: [REDACTED]
+[dhcp.wlan0.dns2]: [192.168.191.1]
 
 [dhcp.wlan0.dns3]: []
 
@@ -58,9 +58,9 @@
 
 [dhcp.wlan0.domain]: []
 
-[dhcp.wlan0.gateway]: [REDACTED]
+[dhcp.wlan0.gateway]: [192.168.191.1]
 
-[dhcp.wlan0.ipaddress]: [REDACTED]
+[dhcp.wlan0.ipaddress]: [192.168.191.104]
 
 [dhcp.wlan0.leasetime]: [7200]
 
@@ -74,7 +74,7 @@
 
 [dhcp.wlan0.result]: [ok]
 
-[dhcp.wlan0.server]: [REDACTED]
+[dhcp.wlan0.server]: [192.168.191.1]
 
 [dhcp.wlan0.vendorInfo]: []
 
@@ -246,11 +246,11 @@
 
 [net.change]: [net.dns2]
 
-[net.dns1]: [REDACTED]
+[net.dns1]: [58.22.96.66]
 
-[net.dns2]: [REDACTED]
+[net.dns2]: [192.168.191.1]
 
-[net.hostname]: [REDACTED]
+[net.hostname]: [android-3047fa1f7957a489]
 
 [net.nsiot_pending]: [false]
 

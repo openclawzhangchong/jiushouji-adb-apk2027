@@ -71,6 +71,7 @@
 | 固件版本 | `XM01X8_V1.0.0_230811` |
 | 编译时间 | 2023-08-11 11:52:43 CST |
 | Build Fingerprint | `alps/full_b906/b906:5.1/LRX21M/1691725749:user/test-keys` |
+| **ODM 厂商** | **`KEYTAK`**（`ro.mediatek.project.path = device/keytak/b906`） |
 | 平台线索 | 基带串 `LOKYEE82_WET_KK_GPRS_HW` → 推断为 **`joya82` 平台**（详见 `01-设备评估报告.md`） |
 | 序列号 | `0123456789ABCDEF` ⚠️ MTK 默认占位值，**不唯一，禁止用作设备标识** |
 
