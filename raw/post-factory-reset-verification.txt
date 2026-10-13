@@ -1,0 +1,26 @@
+# 恢复出厂设置后的设备状态核对
+# 采集时间: 2026-10-13 17:12:38
+
+== adb devices ==
+List of devices attached
+0123456789ABCDEF       device product:full_b906 model:XXB device:b906 transport_id:1
+
+
+== 测试 APK 是否清除 ==
+
+== Device Policy Manager ==
+Current Device Policy Manager state:
+  Enabled Device Admins (User 0):
+ 
+  mPasswordOwner=-1
+
+== 磁盘使用 ==
+/data                   13.2G   149.3M    13.1G   4096
+
+== 当前前台（应回到 Launcher3）==
+  mCurrentFocus=Window{3ed4ded0 u0 com.android.launcher3/com.android.launcher3.Launcher}
+
+== 包总数（初始为 84）==
+84
+
+== 第三方应用（应为空）==

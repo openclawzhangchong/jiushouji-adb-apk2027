@@ -49,6 +49,7 @@ adb shell am start -n com.example.jiushouji/.MainActivity
 
 | 文档 | 给谁看 | 内容 |
 |---|---|---|
+| **[07 · 开发任务书](docs/07-开发任务书.md)** | **程序员 / 项目经理** | ★★★ **可直接下发的任务书**：硬约束清单、功能要求、参考代码、13 项验收标准 |
 | **[06 · Kiosk 可行性实测](docs/06-Kiosk可行性实测.md)** | **决策者 / 程序员** | ★★ **自建 APK 真机全流程验证**：安装 / 桌面接管 / 开机自启 / Device Owner / LockTask 锁定 |
 | **[02 · APK 开发指南](docs/02-APK开发指南.md)** | **程序员** | ★ 硬件/软件规格、编译配置、外设陷阱、**开机自启方案**、性能预算、自检清单 |
 | [01 · 设备评估报告](docs/01-设备评估报告.md) | 所有人 | 设备身份、平台识别、完整规格、能力边界 |
@@ -58,6 +59,9 @@ adb shell am start -n com.example.jiushouji/.MainActivity
 | [`raw/`](raw/) | 需要原始数据 | 全部原始实测输出（getprop / 崩溃 tombstone / 日志…） |
 | [`tools/`](tools/) | 复现 | 测试 APK 源码与构建脚本、CPU 测试脚本、WebView 检测页 |
 | [`skills/`](skills/) | 自动化 | 「连接 + 诊断 + 设备画像」的可复用流程 |
+
+> 👉 **要开始写代码的人：直接读 [07-开发任务书](docs/07-开发任务书.md)，
+> 参考实现看 [`tools/kiosk-test/`](tools/kiosk-test/)。**
 
 > 👉 **程序员请直接从 [02-APK开发指南](docs/02-APK开发指南.md) 的第 0 节开始读。**
 
@@ -200,8 +204,11 @@ jiushouji-adb-apk2027/
 - [x] 实机 `adb reboot` 验证开机自启 → **36 秒后自动拉起**
 - [x] 实测 Device Owner + LockTask 锁定效果 → **Home/Back 均无法退出**
 - [x] 验证 Device Owner 清除路径 → **恢复出厂可清除，但会重置 ADB 授权**
-- [ ] 用**原生 View** 写一个真正的 Kiosk 应用原型（避开 WebView）
+- [x] 产出**开发任务书**（含 13 项可验收标准）→ [`docs/07-开发任务书.md`](docs/07-开发任务书.md)
+- [x] 测试完毕，设备已完整恢复初始状态（84 包 / 0 第三方 / 无 Device Owner）
+- [ ] 按任务书开发真正的 Kiosk 应用（**用原生 View，避开 WebView**）
 - [ ] 加入崩溃自恢复（利用 framework 软重启后重新广播 BOOT_COMPLETED 的特性）
+- [ ] 批量部署流程验证（多台设备的 ADB 授权 + Device Owner 设置）
 
 ---
 

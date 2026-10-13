@@ -174,17 +174,25 @@ Failure [DELETE_FAILED_DEVICE_POLICY_MANAGER]
 
 调用 `DevicePolicyManager.wipeData(0)` 后，设备自动擦除并重启。
 
-**恢复后的状态**：
+**恢复后的状态核对**（实测，见 [`../raw/post-factory-reset-verification.txt`](../raw/post-factory-reset-verification.txt)）：
 
-| 项 | 结果 |
-|---|---|
-| 设备重启 | ✅ 约 3–5 分钟后重新上线 |
-| 测试 APK | ✅ 已清除 |
-| ADB 授权 | ⚠️ 被重置为 `unauthorized`，**需要在设备屏幕上重新点一次「允许」** |
-| USB 枚举 | 从 `PID_201D`（MTP+ADB）变为 `PID_2008`（仅 MTP），重启后恢复 |
+| 项 | 恢复后 | 初始值 | 结论 |
+|---|---|---|---|
+| 设备重启 | ✅ 约 3–5 分钟后重新上线 | — | |
+| 测试 APK | ✅ 已清除 | 无 | 干净 |
+| Device Owner | ✅ 已清除（`Enabled Device Admins` 为空） | 空 | 干净 |
+| 包总数 | **84** | 84 | 完全一致 |
+| 第三方应用 | 0 个 | 0 个 | 完全一致 |
+| 默认桌面 | `com.android.launcher3` | 同 | 完全一致 |
+| `/data` 占用 | **149.3 M** | 152.2 M | 更干净 |
+| ADB 授权 | ⚠️ 被重置为 `unauthorized` | 已授权 | **需重新在设备上点「允许」** |
+| USB 枚举 | 期间变为 `PID_2008`（仅 MTP），重启后恢复 | `PID_201D` | 正常 |
+
+**结论：设备已被完整恢复到初始状态**，可交付给真实应用使用。
 
 > ⚠️ **重要提醒**：恢复出厂设置会清除 ADB 授权密钥。
 > 换而言之——**每台机器做完 Device Owner 测试后想复用，都要重新授权一次 ADB。**
+> 批量部署时要把这一步算进流程。
 
 ---
 
