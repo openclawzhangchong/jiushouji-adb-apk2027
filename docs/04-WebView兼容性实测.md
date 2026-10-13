@@ -1,9 +1,10 @@
 # WebView / 浏览器兼容性实测报告
 
-- **测试日期**：2026-10-13
+- **测试日期**：2026-10-13（v2 修正版，17:32 复测）
 - **测试方式**：自建特性检测页，从 PC 起 HTTP 服务，用设备自带浏览器访问
-- **测试页**：[`../tools/webview-test.html`](../tools/webview-test.html)
-- **原始截图**：`../assets/webview-cap1.png` ~ `webview-cap3.png`
+- **测试页**：[`../tools/webview-test.html`](../tools/webview-test.html)（v1）、
+  [`../tools/webview-test-v2.html`](../tools/webview-test-v2.html)（v2，**修正版，结论以 v2 为准**）
+- **原始截图**：`../assets/webview-cap1.png` ~ `cap3.png`（v1）、`webview-v2-1.png` ~ `v2-2.png`（v2）
 
 ---
 
@@ -14,34 +15,41 @@ WebView 版本 = Chrome 37.0.0.0    (2014 年 8 月)
 UA = Mozilla/5.0 (Linux; Android 5.1; XXB Build/LRX21M) AppleWebKit/537.36
      (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile Safari/537.36
 
-特性检测结果：20 / 52 PASS   (通过率 38%)
+特性检测结果（v2）：22 / 53 PASS   (通过率 42%)
 ```
 
-**一句话**：**ES6 语法全线不可用，现代 CSS 布局特性大半缺失。**
+**一句话**：**ES6 语法基本不可用（但 `const` 是支持的），现代 CSS 布局特性大半缺失。**
 用 WebView 承载 H5 界面时，**必须按 2014 年的浏览器标准写代码**（ES5 + 传统 CSS）。
+
+> ⚠️ **v1 的错误已修正**：v1 用 `eval('let a=1; const b=2;')` 判断，
+> 因为 `let` 报错就把 `const` 也判成 FAIL。
+> 实际上 **`const` 是支持的**（Chrome 从 v6 就支持），只有 `let` 不支持。
+> v2 改用 `new Function()` 做**纯语法解析测试**，绕开了 eval 作用域的干扰。
 
 ---
 
 ## 二、完整检测结果（52 项）
 
-### ❌ ES6+ 语法 —— 10 项全灭
+### 语法支持（v2 修正版，纯解析测试）
 
-| 特性 | 结果 |
-|---|---|
-| `let` / `const` | ❌ FAIL |
-| 箭头函数 `=>` | ❌ FAIL |
-| 模板字符串 `` `${x}` `` | ❌ FAIL |
-| `class` 语法 | ❌ FAIL |
-| 默认参数 `function(x=1)` | ❌ FAIL |
-| 解构赋值 `var {a}=obj` | ❌ FAIL |
-| 展开运算符 `...` | ❌ FAIL |
-| `generator` (`function*`) | ❌ FAIL |
-| `async` / `await` | ❌ FAIL |
-| `for...of` | ❌ FAIL |
+| 特性 | 结果 | 备注 |
+|---|---|---|
+| **`const`** | ✅ **PASS** | ⚠️ **v1 判错了**。Chrome 从 v6 就支持 |
+| `let` | ❌ FAIL | ES6 块级作用域 `let` 尚未支持 |
+| 箭头函数 `=>` | ❌ FAIL | |
+| 模板字符串 `` `${x}` `` | ❌ FAIL | |
+| `class` 语法 | ❌ FAIL | |
+| 默认参数 `function(x=1)` | ❌ FAIL | |
+| 解构赋值 `var {a}=obj` | ❌ FAIL | |
+| 展开运算符 `...` | ❌ FAIL | |
+| `generator` (`function*`) | ❌ FAIL | |
+| `async` / `await` | ❌ FAIL | |
+| `for...of` | ❌ FAIL | |
+| Object 方法简写 `{a(){}}` | ❌ FAIL | |
 
-> ⚠️ **这是最致命的一条**。任何用 ES6 写、未经 Babel 转译的 JS，在这台设备上会直接
-> **语法报错、整段脚本不执行**（不是降级，是白屏）。
-> 必须用 Babel / TypeScript 编译到 **ES5**，并引入 polyfill。
+> ⚠️ **这是最致命的一条**。`let`、`class`、箭头函数、`async/await` 写出来的 JS，
+> 在这台设备上会直接**语法报错、整段脚本不执行**（不是降级，是白屏）。
+> **必须用 Babel / TypeScript 编译到 ES5，并引入 polyfill。**
 
 ### ❌ 内建对象与方法 —— 14 项缺失
 
@@ -85,6 +93,7 @@ UA = Mozilla/5.0 (Linux; Android 5.1; XXB Build/LRX21M) AppleWebKit/537.36
 | `MutationObserver` | ✅ PASS | |
 | `JSON` | ✅ PASS | |
 | `atob` / `btoa` | ✅ PASS | |
+| **`crypto.subtle`** | ✅ **PASS** | v2 新增。WebCrypto 可用（意外收获） |
 
 ### ✅ Canvas 全部可用
 
@@ -106,6 +115,26 @@ UA = Mozilla/5.0 (Linux; Android 5.1; XXB Build/LRX21M) AppleWebKit/537.36
 | `calc()` | ✅ PASS | |
 | `transform` | ✅ PASS | |
 | `position: sticky` | ❌ FAIL | |
+
+---
+
+## 二·5、TLS 版本实测（v2 新增，此前只是推断）
+
+早期文档写「TLS 1.3 需要 Android 10+，这台不支持」——那是**推断，没实测**。
+现在做了对照实验：
+
+| 服务端配置 | 设备表现 | 结论 |
+|---|---|---|
+| **仅 TLS 1.2**（对照组） | 弹「安全警告：该网站的安全证书有问题」（自签证书），**握手成功** | ✅ TLS 1.2 可用 |
+| **仅 TLS 1.3**（实验组） | 「找不到网页」+「**无法建立安全连接**」 | ❌ **TLS 1.3 不可用** |
+
+测试方法：在本机（`192.168.191.105`）用 Python 起两个 HTTPS 服务，分别锁死 TLS 版本，
+用设备自带浏览器访问，对比结果。
+
+截图：[`../assets/tls12-device.png`](../assets/tls12-device.png)、
+[`../assets/tls13-device.png`](../assets/tls13-device.png)
+
+**对服务端的要求**：**必须保留 TLS 1.2 支持**，只开 TLS 1.3 的设备连不上。
 
 ---
 
