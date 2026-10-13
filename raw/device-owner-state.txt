@@ -1,0 +1,34 @@
+Current Device Policy Manager state:
+  Enabled Device Admins (User 0):
+  com.jiushouji.kiosktest/.AdminReceiver:
+    uid=10056
+    policies:
+      wipe-data
+      reset-password
+      limit-password
+      watch-login
+      force-lock
+      disable-camera
+    passwordQuality=0x0
+    minimumPasswordLength=0
+    passwordHistoryLength=0
+    minimumPasswordUpperCase=0
+    minimumPasswordLowerCase=0
+    minimumPasswordLetters=1
+    minimumPasswordNumeric=1
+    minimumPasswordSymbols=1
+    minimumPasswordNonLetter=0
+    maximumTimeToUnlock=0
+    maximumFailedPasswordsForWipe=0
+    specifiesGlobalProxy=false
+    passwordExpirationTimeout=0
+    passwordExpirationDate=0
+    encryptionRequested=false
+    disableCamera=false
+    disableCallerId=false
+    disableScreenCapture=false
+    requireAutoTime=false
+    disabledKeyguardFeatures=0
+    crossProfileWidgetProviders=null
+ 
+  mPasswordOwner=-1

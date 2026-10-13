@@ -1,0 +1,2 @@
+system    3822  1     86476  6360  ffffffff 00000000 S /system/bin/surfaceflinger
+system    4206  3826  1032996 69904 ffffffff 00000000 S system_server

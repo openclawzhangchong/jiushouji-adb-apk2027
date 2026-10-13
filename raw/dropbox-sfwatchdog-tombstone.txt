@@ -1,0 +1,70 @@
+pid: 133, tid: 368, name: SFWatchDog  >>> /system/bin/surfaceflinger <<<
+signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+    r0 00000000  r1 00000170  r2 00000006  r3 00000000
+    r4 b4a08dd8  r5 00000006  r6 00000016  r7 0000010c
+    r8 ffffffb8  r9 b8329868  sl b6ee1129  fp b4a08dd0
+    ip 00000170  sp b4a08b80  lr b6ee195d  pc b6f08658  cpsr 60030010
+    d0  0000000000000000  d1  3d656d6954706f49
+    d2  0000017000000000  d3  3d3d3d3dffffffe0
+    d4  0000000000000170  d5  0000000000000001
+    d6  0000000000000001  d7  00000000438c0000
+    d8  0000000000000000  d9  0000000000000000
+    d10 0000000000000000  d11 0000000000000000
+    d12 0000000000000000  d13 0000000000000000
+    d14 0000000000000000  d15 0000000000000000
+    d16 0000017000000170  d17 0000000000000020
+    d18 000000003f800000  d19 0000000000000000
+    d20 3f80000000000000  d21 0000000000000000
+    d22 0000000000000000  d23 000000003f800000
+    d24 0000000000000000  d25 3f80000000000000
+    d26 0000000000000000  d27 0000000000000000
+    d28 0000000000000000  d29 0000000000000000
+    d30 0000000000000000  d31 0000000000000000
+    scr 20000010
+
+backtrace:
+    #00 pc 0003d658  /system/lib/libc.so (tgkill+12)
+    #01 pc 00016959  /system/lib/libc.so (pthread_kill+52)
+    #02 pc 0001756f  /system/lib/libc.so (raise+10)
+    #03 pc 00013ea5  /system/lib/libc.so (__libc_android_abort+36)
+    #04 pc 00012524  /system/lib/libc.so (abort+4)
+    #05 pc 0002cd6b  /system/lib/libsurfaceflinger.so
+    #06 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #07 pc 00010577  /system/lib/libutils.so
+    #08 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #09 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         b4a08b40  00004000  
+         b4a08b44  b4a08c5f  [stack:368]
+         b4a08b48  b4a08dd0  [stack:368]
+         b4a08b4c  00000050  
+         b4a08b50  ffff0208  [vectors]
+         b4a08b54  b4a08c54  [stack:368]
+         b4a08b58  0000005b  
+         b4a08b5c  b6d66d6c  /system/lib/libsurfaceflinger.so
+         b4a08b60  b8329844  [heap]
+         b4a08b64  da8488f8  
+         b4a08b68  b4a08dd8  [stack:368]
+         b4a08b6c  00000006  
+         b4a08b70  00000016  
+         b4a08b74  00000170  
+         b4a08b78  00000000  
+         b4a08b7c  b6ee1955  /system/lib/libc.so (pthread_kill+48)
+    #00  b4a08b80  b4a08dd0  [stack:368]
+         ........  ........
+    #01  b4a08b80  b4a08dd0  [stack:368]
+         b4a08b84  00000006  
+         b4a08b88  00000000  
+         b4a08b8c  b4a08ba8  [stack:368]
+         b4a08b90  00000000  
+         b4a08b94  b6ee2573  /system/lib/libc.so (raise+14)
+    #02  b4a08b98  b4a08ba4  [stack:368]
+         b4a08b9c  b6edeea9  /system/lib/libc.so (__libc_android_abort+40)
+    #03  b4a08ba0  b83297f8  [heap]
+         b4a08ba4  ffffffdf  
+         b4a08ba8  ffffc3b8  
+         b4a08bac  00000000  
+         b4a08bb0  ffffffb8  
+         b4a08bb4  b8329868  [heap]
+         b4a08bb8  b83297f8  [heap]

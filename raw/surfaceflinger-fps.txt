@@ -1,0 +1,5 @@
+10-13 16:46:28.519 I/SurfaceFlinger( 3822): [Built-in Screen (type:0)] fps:0.094726,dur:10556.76,max:10556.76,min:10556.76
+10-13 16:46:36.992 I/SurfaceFlinger( 3822): [Built-in Screen (type:0)] fps:0.236022,dur:8473.78,max:8458.04,min:15.74
+10-13 16:46:38.007 I/SurfaceFlinger( 3822): [Built-in Screen (type:0)] fps:2.957110,dur:1014.50,max:506.17,min:16.35
+10-13 16:47:00.060 I/SurfaceFlinger( 3822): [Built-in Screen (type:0)] fps:0.045345,dur:22052.97,max:22052.97,min:22052.97
+10-13 16:47:07.491 I/SurfaceFlinger( 3822): [Built-in Screen (type:0)] fps:0.807426,dur:7431.02,max:7321.64,min:16.21

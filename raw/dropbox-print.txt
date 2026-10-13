@@ -1,0 +1,1579 @@
+Drop box contents: 3 entries
+
+========================================
+2026-10-13 16:46:07 SYSTEM_RESTART (text, 257 bytes)
+Build: alps/full_b906/b906:5.1/LRX21M/1691725749:user/test-keys
+Hardware: unknown
+Revision: 0
+Bootloader: unknown
+Radio: unknown
+Kernel: Linux version 3.10.54 (root@twd-PowerEdge-R720xd) (gcc version 4.8 (GCC) ) #9 SMP PREEMPT Tue Aug 15 17:34:00 CST 2023
+
+
+========================================
+2026-10-13 16:46:07 SYSTEM_TOMBSTONE (compressed text, 3919 bytes)
+Build: alps/full_b906/b906:5.1/LRX21M/1691725749:user/test-keys
+Hardware: unknown
+Revision: 0
+Bootloader: unknown
+Radio: unknown
+Kernel: Linux version 3.10.54 (root@twd-PowerEdge-R720xd) (gcc version 4.8 (GCC) ) #9 SMP PREEMPT Tue Aug 15 17:34:00 CST 2023
+
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+Build fingerprint: 'alps/full_b906/b906:5.1/LRX21M/1691725749:user/test-keys'
+Revision: '0'
+ABI: 'arm'
+pid: 2580, tid: 2580, name: grep  >>> grep <<<
+signal 13 (SIGPIPE), code 0 (SI_USER), fault addr --------
+    r0 ffffffe0  r1 b8b00cb0  r2 00000072  r3 44000000
+    r4 b6ee6400  r5 b8b00cb0  r6 00000072  r7 00000004
+    r8 b6ef0000  r9 b6e9dac1  sl b6eea024  fp b6ef0024
+    ip 00000000  sp bea378d0  lr b6ec10f9  pc b6ec9a38  cpsr 000d0010
+    d0  0000000000000000  d1  0000000000000072
+    d2  00000a1400000065  d3  00000000ffffff70
+    d4  0000000000000a14  d5  77732072746c646c
+    d6  3477207064313134  d7  3536682070643131
+    d8  0000000000000000  d9  0000000000000000
+    d10 0000000000000000  d11 0000000000000000
+    d12 0000000000000000  d13 0000000000000000
+    d14 0000000000000000  d15 0000000000000000
+    d16 00000a1400000a14  d17 0000000000000020
+    d18 412e848000000000  d19 0000000000000000
+    d20 0000000000000000  d21 0000000000000000
+    d22 0000000000000000  d23 0000000000000000
+    d24 0000000000000000  d25 0000000000000000
+    d26 0000000000000000  d27 0000000000000000
+    d28 0000000000000000  d29 0000000000000000
+    d30 0000000000000000  d31 0000000000000000
+    scr 80000010
+
+backtrace:
+    #00 pc 0003da38  /system/lib/libc.so (write+12)
+    #01 pc 000350f7  /system/lib/libc.so (__sflush+50)
+    #02 pc 00024e01  /system/lib/libc.so (fclose+40)
+    #03 pc 00011ad5  /system/lib/libc.so (malloc_fini_impl()+20)
+    #04 pc 00016f83  /system/lib/libc.so (pthread_once+90)
+    #05 pc 0001237b  /system/lib/libc.so (malloc_debug_fini+10)
+    #06 pc 0003b4f1  /system/lib/libc.so (__cxa_finalize+132)
+    #07 pc 000119f3  /system/lib/libc.so (exit+6)
+    #08 pc 00016457  /system/bin/toolbox
+    #09 pc 00005973  /system/bin/toolbox
+    #10 pc 000123d5  /system/lib/libc.so (__libc_init+44)
+    #11 pc 000059f8  /system/bin/toolbox
+
+stack:
+         bea37890  000000c8  
+         bea37894  000000d0  
+         bea37898  000000c8  
+         bea3789c  b8b005f8  [heap]
+         bea378a0  b8b00600  [heap]
+         bea378a4  b8b005f8  [heap]
+         bea378a8  00000008  
+         bea378ac  b6eb8295  /system/lib/libc.so (dlrealloc+104)
+         bea378b0  b6eb822d  /system/lib/libc.so (dlrealloc)
+         bea378b4  b8b004a8  [heap]
+         bea378b8  00000100  
+         bea378bc  00000032  
+         bea378c0  b6ee6400  /system/lib/libc.so
+         bea378c4  b8b00cb0  [heap]
+         bea378c8  00000072  
+         bea378cc  b6ec10f9  /system/lib/libc.so (__sflush+52)
+    #00  bea378d0  b6ee6400  /system/lib/libc.so
+         ........  ........
+    #01  bea378d0  b6ee6400  /system/lib/libc.so
+         bea378d4  00000008  
+         bea378d8  00000000  
+         bea378dc  b6eb0e05  /system/lib/libc.so (fclose+44)
+    #02  bea378e0  b6ee3648  /system/lib/libc.so
+         bea378e4  b6ee63ac  /system/lib/libc.so
+         bea378e8  00000000  
+         bea378ec  b6e9dad9  /system/lib/libc.so (malloc_fini_impl()+24)
+    #03  bea378f0  b6ee6580  /system/lib/libc.so
+         bea378f4  b6ea2f85  /system/lib/libc.so (pthread_once+92)
+    #04  bea378f8  b6ee6580  /system/lib/libc.so
+         bea378fc  b6e9dac1  /system/lib/libc.so (malloc_fini_impl())
+         bea37900  00000001  
+         bea37904  00000001  
+         bea37908  00001000  
+         bea3790c  00000000  
+         bea37910  b6ea07cd  /system/lib/libc.so (__libc_fini)
+         bea37914  b6ef0000  
+         bea37918  0000000c  
+         bea3791c  b6e9e37f  /system/lib/libc.so (malloc_debug_fini+14)
+    #05  bea37920  00000000  
+         bea37924  b6ec74f3  /system/lib/libc.so (__cxa_finalize+134)
+    #06  bea37928  b6f2b6d8  /system/bin/toolbox
+         bea3792c  b6eea024  
+         bea37930  00000001  
+         bea37934  00000000  
+         bea37938  fffffeac  
+         bea3793c  00000000  
+         bea37940  00000000  
+         bea37944  bea37a10  [stack]
+         bea37948  b6f4d2ec  
+         bea3794c  b6f4d324  
+         bea37950  0000040c  
+         bea37954  b6e9d9f7  /system/lib/libc.so (exit+10)
+    #07  bea37958  b6f4ce08  
+         bea3795c  b6f1f45b  /system/bin/toolbox
+    #08  bea37960  00000000  
+         bea37964  b6ea53f7  /system/lib/libc.so (mmap64+110)
+         bea37968  00000000  
+         bea3796c  00000003  
+         bea37970  b6ee7dcc  
+         bea37974  b6f2983a  /system/bin/toolbox
+         bea37978  00000000  
+         bea3797c  b6ea07cd  /system/lib/libc.so (__libc_fini)
+         bea37980  b6f2b6d8  /system/bin/toolbox
+         bea37984  b6ea543d  /system/lib/libc.so (mmap+20)
+         bea37988  ffffffff  
+         bea3798c  bea37a04  [stack]
+         bea37990  00000006  
+         bea37994  bea37b0d  [stack]
+         bea37998  00000003  
+         bea3799c  b6f2b6e0  /system/bin/toolbox
+         ........  ........
+    #09  bea379b0  00000000  
+         bea379b4  bea37a04  [stack]
+         bea379b8  bea37a14  [stack]
+         bea379bc  00000003  
+         bea379c0  b6f0e925  /system/bin/toolbox
+         bea379c4  00000000  
+         bea379c8  00000000  
+         bea379cc  b6e9e3d7  /system/lib/libc.so (__libc_init+46)
+    #10  bea379d0  bea379e8  [stack]
+         bea379d4  00000000  
+         bea379d8  00000000  
+         bea379dc  00000000  
+         bea379e0  00000000  
+         bea379e4  b6f0e9fc  /system/bin/toolbox
+    #11  bea379e8  b6f2b6c8  /system/bin/toolbox
+         bea379ec  b6f2b6d0  /system/bin/toolbox
+         bea379f0  b6f2b6d8  /system/bin/toolbox
+         bea379f4  bea37a00  [stack]
+         bea379f8  00000000  
+         bea379fc  b6efc75b  /system/bin/linker (__dl__ZN20LinkerBlockAllocator11protect_allEi+20)
+         bea37a00  00000003  
+         bea37a04  bea37b0d  [stack]
+         bea37a08  bea37b12  [stack]
+         bea37a0c  bea37b16  [stack]
+         bea37a10  00000000  
+         bea37a14  bea37b43  [stack]
+         bea37a18  bea37b56  [stack]
+         bea37a1c  bea37b82  [stack]
+         bea37a20  bea37b95  [stack]
+         bea37a24  bea37dd0  [stack]
+
+memory near r1:
+    b8b00c90 00000000 00000000 00000000 00000000  
+    b8b00ca0 00000000 00000000 00000000 0000100b  
+    b8b00cb0 436d2020 6f437275 6769666e 74617275  
+    b8b00cc0 3d6e6f69 302e317b 636d3f20 6e6d3f63  
+    b8b00cd0 687a2063 204e435f 746c646c 77732072  
+    b8b00ce0 64313134 34772070 70643131 35366820  
+    b8b00cf0 20706438 64303832 6e206970 206c6d72  
+    b8b00d00 74726f70 6e696620 20726567 79656b2d  
+    b8b00d10 2f762f62 6e2d2068 682f7661 352e7320  
+    b8b00d20 00000a7d 00000000 00000000 00000000  
+    b8b00d30 01010000 00000000 00000000 00000000  
+    b8b00d40 00000000 00000000 00000000 00000000  
+    b8b00d50 00000000 00000000 00000000 00000000  
+    b8b00d60 00000000 00000000 00000000 00000000  
+    b8b00d70 00000000 00000000 00000000 00000261  
+    b8b00d80 00000000 00000000 00000000 00000000  
+
+memory near r3:
+    43ffffe0 -------- -------- -------- --------  
+    43fffff0 -------- -------- -------- --------  
+    44000000 -------- -------- -------- --------  
+    44000010 -------- -------- -------- --------  
+    44000020 -------- -------- -------- --------  
+    44000030 -------- -------- -------- --------  
+    44000040 -------- -------- -------- --------  
+    44000050 -------- -------- -------- --------  
+    44000060 -------- -------- -------- --------  
+    44000070 -------- -------- -------- --------  
+    44000080 -------- -------- -------- --------  
+    44000090 -------- -------- -------- --------  
+    440000a0 -------- -------- -------- --------  
+    440000b0 -------- -------- -------- --------  
+    440000c0 -------- -------- -------- --------  
+    440000d0 -------- -------- -------- --------  
+
+memory near r4:
+    b6ee63e0 00000000 00000000 00000000 00000000  
+    b6ee63f0 00000000 00000000 00000000 00000000  
+    b6ee6400 b8b00cb0 00000000 00001000 00010888  
+    b6ee6410 b8b00cb0 00001000 00000000 b6ee6400  
+    b6ee6420 b6ec2b29 b6ec2ab1 b6ec2b05 b6ec2ad3  
+    b6ee6430 b6ee9648 00000000 00000000 00000000  
+    b6ee6440 00000000 00000000 00000000 00001000  
+    b6ee6450 00000000 00000000 00000000 00000000  
+    b6ee6460 0002000a 00000000 00000000 00000000  
+    b6ee6470 b6ee6454 b6ec2b29 b6ec2ab1 b6ec2b05  
+    b6ee6480 b6ec2ad3 b6ee9668 00000000 00000000  
+    b6ee6490 00000000 00000000 00000000 00000000  
+    b6ee64a0 00000000 00000000 00000000 --------  
+    b6ee64b0 00000000 00000011 b6ee9688 b6ee64b0  
+    b6ee64c0 00000003 b6ee63ac 00000000 --------  
+    b6ee64d0 b6ee64b0 20202020 20202020 20202020  
+
+memory near r5:
+    b8b00c90 00000000 00000000 00000000 00000000  
+    b8b00ca0 00000000 00000000 00000000 0000100b  
+    b8b00cb0 436d2020 6f437275 6769666e 74617275  
+    b8b00cc0 3d6e6f69 302e317b 636d3f20 6e6d3f63  
+    b8b00cd0 687a2063 204e435f 746c646c 77732072  
+    b8b00ce0 64313134 34772070 70643131 35366820  
+    b8b00cf0 20706438 64303832 6e206970 206c6d72  
+    b8b00d00 74726f70 6e696620 20726567 79656b2d  
+    b8b00d10 2f762f62 6e2d2068 682f7661 352e7320  
+    b8b00d20 00000a7d 00000000 00000000 00000000  
+    b8b00d30 01010000 00000000 00000000 00000000  
+    b8b00d40 00000000 00000000 00000000 00000000  
+    b8b00d50 00000000 00000000 00000000 00000000  
+    b8b00d60 00000000 00000000 00000000 00000000  
+    b8b00d70 00000000 00000000 00000000 00000261  
+    b8b00d80 00000000 00000000 00000000 00000000  
+
+memory near r8:
+    b6eeffe0 00000000 00000000 00000000 00000000  
+    b6eefff0 00000000 00000000 00000000 00000000  
+    b6ef0000 00000000 00000002 00000154 b6ec1445  
+    b6ef0010 00000000 00000000 00000000 b6f2b6d8  
+    b6ef0020 00000000 00000000 00000000 00000000  
+    b6ef0030 00000000 00000000 00000000 00000000  
+    b6ef0040 00000000 00000000 00000000 00000000  
+    b6ef0050 00000000 00000000 00000000 00000000  
+    b6ef0060 00000000 00000000 00000000 00000000  
+    b6ef0070 00000000 00000000 00000000 00000000  
+    b6ef0080 00000000 00000000 00000000 00000000  
+    b6ef0090 00000000 00000000 00000000 00000000  
+    b6ef00a0 00000000 00000000 00000000 00000000  
+    b6ef00b0 00000000 00000000 00000000 00000000  
+    b6ef00c0 00000000 00000000 00000000 00000000  
+    b6ef00d0 00000000 00000000 00000000 00000000  
+
+memory near r9:
+    b6e9daa0 459cf304 d305d808 d8054291 2000bf2c  
+    b6e9dab0 bd102001 bd102001 30fff04f 0000bd10  
+    b6e9dac0 4a104b0f b510447b 4620589c efcaf7fc  
+    b6e9dad0 0054f104 efc6f7fc 00a8f104 efc2f7fc  
+    b6e9dae0 447b4b09 b1486818 44794908 efc0f7fc  
+    b6e9daf0 b1184601 44784806 47886800 bf00bd10  
+    b6e9db00 00045b80 ffffff40 00048a3a 00039392  
+    b6e9db10 00048a8a 4696b5f0 b0a54c15 46074a15  
+    b6e9db20 460e447c 58a52180 4a13ac03 447a6828  
+    b6e9db30 46209023 46739300 efa0f7fc 46214638  
+    b6e9db40 ef96f7fc b9506030 ef9ef7fc 4603490b  
+    b6e9db50 20064a0b 44799400 f003447a 9923f99f  
+    b6e9db60 4299682b f7fcd001 b025ef96 bf00bdf0  
+    b6e9db70 00045b24 ffffff44 00039364 00039342  
+    b6e9db80 00039352 4a724b71 e92d447b b0a441f0  
+    b6e9db90 460d589f 81bcf8df 683b4606 44f8ac03  
+
+memory near sl:
+    b6eea004 00000000 00000000 00000000 00000000  
+    b6eea014 00000000 00000000 00000000 00000001  
+    b6eea024 00000000 00000000 00000000 00000000  
+    b6eea034 00000000 00000000 00000000 00000000  
+    b6eea044 00000000 00000000 00000000 00000000  
+    b6eea054 00000000 00000000 00000000 00000000  
+    b6eea064 00000000 00000000 00000000 00000000  
+    b6eea074 00000000 00000000 00000000 00000000  
+    b6eea084 00000000 00000000 00000000 00000000  
+    b6eea094 00000000 00000000 00000000 00000000  
+    b6eea0a4 00000000 00000000 00000000 00000000  
+    b6eea0b4 00000000 00000000 00000000 00000000  
+    b6eea0c4 00000000 00000000 00000000 00000000  
+    b6eea0d4 00000000 00000000 00000000 00000000  
+    b6eea0e4 00000000 00000000 00000000 00000000  
+    b6eea0f4 00000000 00000000 00000000 00000000  
+
+memory near fp:
+    b6ef0004 00000002 00000154 b6ec1445 00000000  
+    b6ef0014 00000000 00000000 b6f2b6d8 00000000  
+    b6ef0024 00000000 00000000 00000000 00000000  
+    b6ef0034 00000000 00000000 00000000 00000000  
+    b6ef0044 00000000 00000000 00000000 00000000  
+    b6ef0054 00000000 00000000 00000000 00000000  
+    b6ef0064 00000000 00000000 00000000 00000000  
+    b6ef0074 00000000 00000000 00000000 00000000  
+    b6ef0084 00000000 00000000 00000000 00000000  
+    b6ef0094 00000000 00000000 00000000 00000000  
+    b6ef00a4 00000000 00000000 00000000 00000000  
+    b6ef00b4 00000000 00000000 00000000 00000000  
+    b6ef00c4 00000000 00000000 00000000 00000000  
+    b6ef00d4 00000000 00000000 00000000 00000000  
+    b6ef00e4 00000000 00000000 00000000 00000000  
+    b6ef00f4 00000000 00000000 00000000 00000000  
+
+memory near sp:
+    bea378b0 b6eb822d b8b004a8 00000100 00000032  
+    bea378c0 b6ee6400 b8b00cb0 00000072 b6ec10f9  
+    bea378d0 b6ee6400 00000008 00000000 b6eb0e05  
+    bea378e0 b6ee3648 b6ee63ac 00000000 b6e9dad9  
+    bea378f0 b6ee6580 b6ea2f85 b6ee6580 b6e9dac1  
+    bea37900 00000001 00000001 00001000 00000000  
+    bea37910 b6ea07cd b6ef0000 0000000c b6e9e37f  
+    bea37920 00000000 b6ec74f3 b6f2b6d8 b6eea024  
+    bea37930 00000001 00000000 fffffeac 00000000  
+    bea37940 00000000 bea37a10 b6f4d2ec b6f4d324  
+    bea37950 0000040c b6e9d9f7 b6f4ce08 b6f1f45b  
+    bea37960 00000000 b6ea53f7 00000000 00000003  
+    bea37970 b6ee7dcc b6f2983a 00000000 b6ea07cd  
+    bea37980 b6f2b6d8 b6ea543d -------- bea37a04  
+    bea37990 00000006 bea37b0d 00000003 b6f2b6e0  
+    bea379a0 00000030 00000000 bea379fc b6f0e975  
+
+code around pc:
+    b6ec9a18 e8bd00f0 e3700a01 912fff1e e2600000  
+    b6ec9a28 ea002778 e1a0c007 e3a07004 ef000000  
+    b6ec9a38 e1a0700c e3700a01 912fff1e e2600000  
+    b6ec9a48 ea002770 e1a0c007 e3a07039 ef000000  
+    b6ec9a58 e1a0700c e3700a01 912fff1e e2600000  
+    b6ec9a68 ea002768 e1a0c007 e59f7014 ef000000  
+    b6ec9a78 e1a0700c e3700a01 912fff1e e2600000  
+    b6ec9a88 ea002760 0000010b e1a0c007 e59f7014  
+    b6ec9a98 ef000000 e1a0700c e3700a01 912fff1e  
+    b6ec9aa8 e2600000 ea002757 00000143 e1a0c007  
+    b6ec9ab8 e3a07f52 ef000000 e1a0700c e3700a01  
+    b6ec9ac8 912fff1e e2600000 ea00274e e1a0c007  
+    b6ec9ad8 e3a07069 ef000000 e1a0700c e3700a01  
+    b6ec9ae8 912fff1e e2600000 ea002746 e1a0c007  
+    b6ec9af8 e3a0704f ef000000 e1a0700c e3700a01  
+    b6ec9b08 912fff1e e2600000 ea00273e e1a0c007  
+
+code around lr:
+    b6ec10d8 60056806 ebc50798 bf140606 69602000  
+    b6ec10e8 2e0060a0 6ae3ddef 69e04629 47984632  
+    b6ec10f8 dc062800 f04f89a1 f04130ff 81a20240  
+    b6ec1108 1a36bd70 e7ec4405 4604b538 480eb928  
+    b6ec1118 4038e8bd f0124478 f7dabf1f 89a3ee9c  
+    b6ec1128 0018f003 f7d9b930 2109eda8 35fff04f  
+    b6ec1138 e0036001 f7da4620 4605ee94 f7da4620  
+    b6ec1148 4628ee96 bf00bd38 00000035 4604b538  
+    b6ec1158 ee80f7da f7da4620 4605ee84 f7da4620  
+    b6ec1168 4628ee86 f012bd38 e92dbeff 460443f8  
+    b6ec1178 f7da460f 6b23ee70 699ab123 f04fb912  
+    b6ec1188 619830ff 29006861 6826dd13 6865210a  
+    b6ec1198 462a4630 eff6f7da 3001b188 60391b81  
+    b6ec11a8 686289a7 5300f447 1a5381a3 0009e884  
+    b6ec11b8 4620e04c efecf7da d0e62800 4681e044  
+    b6ec11c8 f1056ca3 45430850 6c60d208 f7da4641  
+
+memory map: 
+    b6d13000-b6d13fff r-x     4096  /system/lib/libnetd_client.so
+    b6d14000-b6d14fff r--     4096  /system/lib/libnetd_client.so
+    b6d15000-b6d15fff rw-     4096  /system/lib/libnetd_client.so
+    b6d16000-b6d35fff r--   131072  /dev/__properties__
+    b6d36000-b6d41fff r-x    49152  /system/lib/libselinux.so
+    b6d42000-b6d42fff r--     4096  /system/lib/libselinux.so
+    b6d43000-b6d43fff rw-     4096  /system/lib/libselinux.so
+    b6d44000-b6d4ffff r-x    49152  /system/lib/libcutils.so
+    b6d50000-b6d50fff r--     4096  /system/lib/libcutils.so
+    b6d51000-b6d51fff rw-     4096  /system/lib/libcutils.so
+    b6d52000-b6e4bfff r-x  1024000  /system/lib/libcrypto.so
+    b6e4c000-b6e4cfff ---     4096  
+    b6e4d000-b6e5bfff r--    61440  /system/lib/libcrypto.so
+    b6e5c000-b6e61fff rw-    24576  /system/lib/libcrypto.so
+    b6e62000-b6e63fff rw-     8192  
+    b6e64000-b6e65fff r-x     8192  /system/lib/libstdc++.so
+    b6e66000-b6e66fff r--     4096  /system/lib/libstdc++.so
+    b6e67000-b6e67fff rw-     4096  /system/lib/libstdc++.so
+    b6e68000-b6e80fff r-x   102400  /system/lib/libm.so
+    b6e81000-b6e81fff r--     4096  /system/lib/libm.so
+    b6e82000-b6e82fff rw-     4096  /system/lib/libm.so
+    b6e84000-b6e88fff r-x    20480  /system/lib/liblog.so
+    b6e89000-b6e89fff r--     4096  /system/lib/liblog.so
+    b6e8a000-b6e8afff rw-     4096  /system/lib/liblog.so
+    b6e8b000-b6e8bfff r--     4096  
+    b6e8c000-b6ee0fff r-x   348160  /system/lib/libc.so
+    b6ee1000-b6ee3fff r--    12288  /system/lib/libc.so
+    b6ee4000-b6ee6fff rw-    12288  /system/lib/libc.so
+    b6ee7000-b6eeffff rw-    36864  
+    b6ef0000-b6ef0fff r--     4096  
+    b6ef1000-b6ef1fff r-x     4096  /system/lib/libsigchain.so
+    b6ef2000-b6ef2fff r--     4096  /system/lib/libsigchain.so
+    b6ef3000-b6ef3fff rw-     4096  /system/lib/libsigchain.so
+    b6ef4000-b6ef4fff rw-     4096  
+    b6ef5000-b6ef5fff r--     4096  
+    b6ef6000-b6ef7fff rw-     8192  
+    b6ef8000-b6ef8fff r-x     4096  [sigpage]
+    b6ef9000-b6f05fff r-x    53248  /system/bin/linker
+    b6f06000-b6f06fff r--     4096  /system/bin/linker
+    b6f07000-b6f07fff rw-     4096  /system/bin/linker
+    b6f08000-b6f08fff rw-     4096  
+    b6f09000-b6f29fff r-x   135168  /system/bin/toolbox
+    b6f2b000-b6f2bfff r--     4096  /system/bin/toolbox
+    b6f2c000-b6f2efff rw-    12288  /system/bin/toolbox
+    b6f2f000-b6f4dfff rw-   126976  
+    b8b00000-b8b01fff rw-     8192  [heap]
+    bea17000-bea37fff rw-   135168  [stack]
+    ffff0000-ffff0fff r-x     4096  [vectors]
+
+========================================
+2026-10-13 16:46:07 SYSTEM_TOMBSTONE (compressed text, 7621 bytes)
+Build: alps/full_b906/b906:5.1/LRX21M/1691725749:user/test-keys
+Hardware: unknown
+Revision: 0
+Bootloader: unknown
+Radio: unknown
+Kernel: Linux version 3.10.54 (root@twd-PowerEdge-R720xd) (gcc version 4.8 (GCC) ) #9 SMP PREEMPT Tue Aug 15 17:34:00 CST 2023
+
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+Build fingerprint: 'alps/full_b906/b906:5.1/LRX21M/1691725749:user/test-keys'
+Revision: '0'
+ABI: 'arm'
+pid: 133, tid: 368, name: SFWatchDog  >>> /system/bin/surfaceflinger <<<
+signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+    r0 00000000  r1 00000170  r2 00000006  r3 00000000
+    r4 b4a08dd8  r5 00000006  r6 00000016  r7 0000010c
+    r8 ffffffb8  r9 b8329868  sl b6ee1129  fp b4a08dd0
+    ip 00000170  sp b4a08b80  lr b6ee195d  pc b6f08658  cpsr 60030010
+    d0  0000000000000000  d1  3d656d6954706f49
+    d2  0000017000000000  d3  3d3d3d3dffffffe0
+    d4  0000000000000170  d5  0000000000000001
+    d6  0000000000000001  d7  00000000438c0000
+    d8  0000000000000000  d9  0000000000000000
+    d10 0000000000000000  d11 0000000000000000
+    d12 0000000000000000  d13 0000000000000000
+    d14 0000000000000000  d15 0000000000000000
+    d16 0000017000000170  d17 0000000000000020
+    d18 000000003f800000  d19 0000000000000000
+    d20 3f80000000000000  d21 0000000000000000
+    d22 0000000000000000  d23 000000003f800000
+    d24 0000000000000000  d25 3f80000000000000
+    d26 0000000000000000  d27 0000000000000000
+    d28 0000000000000000  d29 0000000000000000
+    d30 0000000000000000  d31 0000000000000000
+    scr 20000010
+
+backtrace:
+    #00 pc 0003d658  /system/lib/libc.so (tgkill+12)
+    #01 pc 00016959  /system/lib/libc.so (pthread_kill+52)
+    #02 pc 0001756f  /system/lib/libc.so (raise+10)
+    #03 pc 00013ea5  /system/lib/libc.so (__libc_android_abort+36)
+    #04 pc 00012524  /system/lib/libc.so (abort+4)
+    #05 pc 0002cd6b  /system/lib/libsurfaceflinger.so
+    #06 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #07 pc 00010577  /system/lib/libutils.so
+    #08 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #09 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         b4a08b40  00004000  
+         b4a08b44  b4a08c5f  [stack:368]
+         b4a08b48  b4a08dd0  [stack:368]
+         b4a08b4c  00000050  
+         b4a08b50  ffff0208  [vectors]
+         b4a08b54  b4a08c54  [stack:368]
+         b4a08b58  0000005b  
+         b4a08b5c  b6d66d6c  /system/lib/libsurfaceflinger.so
+         b4a08b60  b8329844  [heap]
+         b4a08b64  da8488f8  
+         b4a08b68  b4a08dd8  [stack:368]
+         b4a08b6c  00000006  
+         b4a08b70  00000016  
+         b4a08b74  00000170  
+         b4a08b78  00000000  
+         b4a08b7c  b6ee1955  /system/lib/libc.so (pthread_kill+48)
+    #00  b4a08b80  b4a08dd0  [stack:368]
+         ........  ........
+    #01  b4a08b80  b4a08dd0  [stack:368]
+         b4a08b84  00000006  
+         b4a08b88  00000000  
+         b4a08b8c  b4a08ba8  [stack:368]
+         b4a08b90  00000000  
+         b4a08b94  b6ee2573  /system/lib/libc.so (raise+14)
+    #02  b4a08b98  b4a08ba4  [stack:368]
+         b4a08b9c  b6edeea9  /system/lib/libc.so (__libc_android_abort+40)
+    #03  b4a08ba0  b83297f8  [heap]
+         b4a08ba4  ffffffdf  
+         b4a08ba8  ffffc3b8  
+         b4a08bac  00000000  
+         b4a08bb0  ffffffb8  
+         b4a08bb4  b8329868  [heap]
+         b4a08bb8  b83297f8  [heap]
+         b4a08bbc  e5d2f600  
+         b4a08bc0  ffffc3b8  
+         b4a08bc4  b6edd528  /system/lib/libc.so (__bionic_clone)
+    #04  b4a08bc8  b6e7203c  /system/lib/libcutils.so
+         b4a08bcc  b6d5dd6f  /system/lib/libsurfaceflinger.so
+    #05  b4a08bd0  e5d2f600  
+         b4a08bd4  00000000  
+         b4a08bd8  e5d2f600  
+         b4a08bdc  00000000  
+         b4a08be0  e5d2f600  
+         b4a08be4  00000000  
+         b4a08be8  e5d2f600  
+         b4a08bec  00000000  
+         b4a08bf0  7461642f  
+         b4a08bf4  6e612f61  
+         b4a08bf8  46532f72  
+         b4a08bfc  5454525f  
+         b4a08c00  7474722f  
+         b4a08c04  6d75645f  
+         b4a08c08  78742e70  
+         b4a08c0c  00000074  
+         ........  ........
+    #06  b4a08d78  b83297f8  [heap]
+         b4a08d7c  b83297f8  [heap]
+         b4a08d80  b83297f8  [heap]
+         b4a08d84  b8328998  [heap]
+         b4a08d88  b83289c0  [heap]
+         b4a08d8c  0000000a  
+         b4a08d90  b6e5d999  /system/lib/libutils.so (android::Thread::_threadLoop(void*))
+         b4a08d94  b83297f8  [heap]
+         b4a08d98  b8329868  [heap]
+         b4a08d9c  b6e5d579  /system/lib/libutils.so
+    #07  b4a08da0  b6e5d53f  /system/lib/libutils.so
+         b4a08da4  b8329860  [heap]
+         b4a08da8  b83298a0  [heap]
+         b4a08dac  b8329860  [heap]
+         b4a08db0  00000078  
+         b4a08db4  b6ee1149  /system/lib/libc.so (__pthread_start(void*)+32)
+    #08  b4a08db8  b6ee1129  /system/lib/libc.so (__pthread_start(void*))
+         b4a08dbc  b8329868  [heap]
+         b4a08dc0  b6ee1129  /system/lib/libc.so (__pthread_start(void*))
+         b4a08dc4  b6edf209  /system/lib/libc.so (__start_thread+8)
+    #09  b4a08dc8  b4a08dd0  [stack:368]
+         b4a08dcc  00000000  
+         b4a08dd0  b4a08dd0  [stack:368]
+         b4a08dd4  b8329860  [heap]
+         b4a08dd8  00000016  
+         b4a08ddc  00000000  
+         b4a08de0  00000000  
+         b4a08de4  a358499e  
+         b4a08de8  00000000  
+         b4a08dec  00000000  
+         b4a08df0  00000000  
+         b4a08df4  00000000  
+         b4a08df8  00000000  
+         b4a08dfc  00000000  
+         b4a08e00  00000000  
+         b4a08e04  00000000  
+
+memory near r4:
+    b4a08db8 b6ee1129 b8329868 b6ee1129 b6edf209  
+    b4a08dc8 b4a08dd0 00000000 b4a08dd0 b8329860  
+    b4a08dd8 00000016 00000000 00000000 a358499e  
+    b4a08de8 00000000 00000000 00000000 00000000  
+    b4a08df8 00000000 00000000 00000000 00000000  
+    b4a08e08 00000000 00000000 00000000 00000000  
+    b4a08e18 00000000 00000000 00000000 00000000  
+    b4a08e28 00000000 00000000 00000000 00000000  
+    b4a08e38 00000000 00000000 00000000 00000000  
+    b4a08e48 00000000 00000000 00000000 00000000  
+    b4a08e58 00000000 00000000 00000000 00000000  
+    b4a08e68 00000000 00000000 00000000 00000000  
+    b4a08e78 00000000 00000000 00000000 00000000  
+    b4a08e88 00000000 00000000 00000000 00000000  
+    b4a08e98 00000000 00000000 00000000 00000000  
+    b4a08ea8 00000000 00000000 00000000 00000000  
+
+memory near r9:
+    b8329848 00000000 00000004 b6d6a6c4 b8328998  
+    b8329858 00000000 0000024b b8322908 b8329cb8  
+    b8329868 00000170 00000085 b4a08dd0 00000001  
+    b8329878 b490b000 000fe000 00001000 00000000  
+    b8329888 00000000 00000000 b6e5d53f b8328848  
+    b8329898 00000000 b4909000 00000001 00000000  
+    b83298a8 00000000 00000000 00000000 00000000  
+    b83298b8 00000000 00000000 00000000 00000000  
+    b83298c8 00000000 00000000 00000000 00000000  
+    b83298d8 00000000 00000000 00000000 00000000  
+    b83298e8 00000000 00000000 00000000 00000000  
+    b83298f8 00000000 00000000 00000000 00000000  
+    b8329908 00000000 00000000 00000000 00000000  
+    b8329918 00000000 00000000 00000000 00000000  
+    b8329928 00000000 00000000 00000000 00000000  
+    b8329938 00000000 00000000 00000000 00000000  
+
+memory near sl:
+    b6ee1108 9003ef24 d0093001 f44f9404 93055300  
+    b6ee1118 4621a803 e844f7f9 63e89803 bd30b007  
+    b6ee1128 f100b538 46040540 f7f84628 4628ece0  
+    b6ee1138 ee3ef7f8 f7ff4620 6b23ffd5 47986b60  
+    b6ee1148 e834f7f9 460db537 46046a41 6a83b1a9  
+    b6ee1158 6880aa02 3d04f842 e82ef7f9 d10c3001  
+    b6ee1168 ed8af7f8 f7f96800 4908e82e 4a084603  
+    b6ee1178 44792005 f7fe447a 2000fe8d b11562e0  
+    b6ee1188 f0004620 2000fa03 bd30b003 00034d47  
+    b6ee1198 0003530e 4ff0e92d 4c6cb087 4693460e  
+    b6ee11a8 447c469a f7f84681 4b69ed68 f8d04607  
+    b6ee11b8 21018000 600158e0 7011f44f eeeef7f8  
+    b6ee11c8 b9384604 20054963 44794a63 f7fe447a  
+    b6ee11d8 e058fe61 b9163014 ef82f7f8 4605e006  
+    b6ee11e8 c50fce0f 0003e896 0003e885 69e16a23  
+    b6ee11f8 70fff603 72fff601 657ff420 667ff422  
+
+memory near fp:
+    b4a08db0 00000078 b6ee1149 b6ee1129 b8329868  
+    b4a08dc0 b6ee1129 b6edf209 b4a08dd0 00000000  
+    b4a08dd0 b4a08dd0 b8329860 00000016 00000000  
+    b4a08de0 00000000 a358499e 00000000 00000000  
+    b4a08df0 00000000 00000000 00000000 00000000  
+    b4a08e00 00000000 00000000 00000000 00000000  
+    b4a08e10 00000000 00000000 00000000 00000000  
+    b4a08e20 00000000 00000000 00000000 00000000  
+    b4a08e30 00000000 00000000 00000000 00000000  
+    b4a08e40 00000000 00000000 00000000 00000000  
+    b4a08e50 00000000 00000000 00000000 00000000  
+    b4a08e60 00000000 00000000 00000000 00000000  
+    b4a08e70 00000000 00000000 00000000 00000000  
+    b4a08e80 00000000 00000000 00000000 00000000  
+    b4a08e90 00000000 00000000 00000000 00000000  
+    b4a08ea0 00000000 00000000 00000000 00000000  
+
+memory near sp:
+    b4a08b60 b8329844 da8488f8 b4a08dd8 00000006  
+    b4a08b70 00000016 00000170 00000000 b6ee1955  
+    b4a08b80 b4a08dd0 00000006 00000000 b4a08ba8  
+    b4a08b90 00000000 b6ee2573 b4a08ba4 b6edeea9  
+    b4a08ba0 b83297f8 ffffffdf ffffc3b8 00000000  
+    b4a08bb0 ffffffb8 b8329868 b83297f8 e5d2f600  
+    b4a08bc0 ffffc3b8 b6edd528 b6e7203c b6d5dd6f  
+    b4a08bd0 e5d2f600 00000000 e5d2f600 00000000  
+    b4a08be0 e5d2f600 00000000 e5d2f600 00000000  
+    b4a08bf0 7461642f 6e612f61 46532f72 5454525f  
+    b4a08c00 7474722f 6d75645f 78742e70 00000074  
+    b4a08c10 00000000 b6f06fb5 00000000 b6f22648  
+    b4a08c20 b6d63f75 00010000 00000000 0000ff00  
+    b4a08c30 b6f15fbc b6f1943b b4a08c5c 00000000  
+    b4a08c40 b4a08c5c b6d6a948 ffffffb8 b6d5da3b  
+    b4a08c50 b6d63f75 35353833 30383038 00203030  
+
+code around pc:
+    b6f08638 e8bd00f0 e3700a01 912fff1e e2600000  
+    b6f08648 ea002870 e1a0c007 e3a07f43 ef000000  
+    b6f08658 e1a0700c e3700a01 912fff1e e2600000  
+    b6f08668 ea002868 e1a0c00d e92d00f0 e89c0070  
+    b6f08678 e3a07015 ef000000 e8bd00f0 e3700a01  
+    b6f08688 912fff1e e2600000 ea00285e e1a0c007  
+    b6f08698 e3a070c1 ef000000 e1a0700c e3700a01  
+    b6f086a8 912fff1e e2600000 ea002856 e1a0c00d  
+    b6f086b8 e92d00f0 e89c0070 e3a070e3 ef000000  
+    b6f086c8 e8bd00f0 e3700a01 912fff1e e2600000  
+    b6f086d8 ea00284c e1a0c007 e3a07f59 ef000000  
+    b6f086e8 e1a0700c e3700a01 912fff1e e2600000  
+    b6f086f8 ea002844 e1a0c007 e3a07067 ef000000  
+    b6f08708 e1a0700c e3700a01 912fff1e e2600000  
+    b6f08718 ea00283c e1a0c007 e3a070b7 ef000000  
+    b6f08728 e1a0700c e3700a01 912fff1e e2600000  
+
+code around lr:
+    b6ee193c 681b447b 42bbb18b 480ed1fb 4478689f  
+    b6ee194c e8eaf7f8 ec48f7f8 4639462a ec68f7f8  
+    b6ee195c bf143001 68252500 4807e004 44782503  
+    b6ee196c e8daf7f8 46286026 bf00bdf8 00045504  
+    b6ee197c 000454f8 000454ee 000454ce 43f7e92d  
+    b6ee198c 29004616 f04fbf0c f04f0980 46980900  
+    b6ee199c f7f84607 6805e970 f8cd4633 46048000  
+    b6ee19ac 20f04639 f7f8464a 1c43ea4a 6820d102  
+    b6ee19bc 42406025 e8bdb003 e92d83f0 46044ff7  
+    b6ee19cc 46886805 f4154691 f4054740 f0005600  
+    b6ee19dc f7f88088 6883e97a 4f15ebb3 f5b7d11c  
+    b6ee19ec d07a4f00 76fcf641 71fcf641 0706ea05  
+    b6ee19fc d074428f 0e04f105 8f00e854 0000f04f  
+    b6ee1a0c 0f05ea98 e844bf08 2800e000 45a8d1f4  
+    b6ee1a1c 8093f000 e7ed6825 0b07ea46 ea4f455d  
+    b6ee1a2c d1114003 0101f045 0700ea41 2f00e854  
+
+memory map: 
+    b1409000-b178cfff rw-  3686400  anon_inode:dmabuf
+    b178d000-b1b10fff rw-  3686400  anon_inode:dmabuf
+    b1b11000-b2470fff rw-  9830400  anon_inode:dmabuf
+    b24e9000-b286cfff rw-  3686400  anon_inode:dmabuf
+    b286d000-b2bf0fff rw-  3686400  anon_inode:dmabuf
+    b32f9000-b3338fff rw-   262144  /dev/mali
+    b36bd000-b36fcfff rw-   262144  /dev/mali
+    b36fd000-b373cfff rw-   262144  /dev/mali
+    b39db000-b3ac0fff rw-   942080  anon_inode:dmabuf
+    b3ac1000-b3b00fff rw-   262144  /dev/mali
+    b3b01000-b3b02fff rw-     8192  
+    b3b03000-b3b03fff ---     4096  
+    b3b04000-b3c00fff rw-  1036288  [stack:1655]
+    b3c4a000-b3c4afff ---     4096  
+    b3c4b000-b3d47fff rw-  1036288  [stack:3771]
+    b3d48000-b3df8fff rw-   724992  anon_inode:dmabuf
+    b3df9000-b3dfcfff rw-    16384  anon_inode:dmabuf
+    b3dfd000-b3e00fff rw-    16384  anon_inode:dmabuf
+    b3e01000-b3e04fff rw-    16384  anon_inode:dmabuf
+    b3e05000-b3e08fff rw-    16384  anon_inode:dmabuf
+    b3e09000-b3e0afff rw-     8192  
+    b3e0b000-b3e0bfff ---     4096  
+    b3e0c000-b3f08fff rw-  1036288  [stack:1681]
+    b3f6a000-b3f6dfff rw-    16384  anon_inode:dmabuf
+    b3f6e000-b3f71fff rw-    16384  anon_inode:dmabuf
+    b3f72000-b3f75fff rw-    16384  anon_inode:dmabuf
+    b3fd9000-b4018fff rw-   262144  /dev/mali
+    b4019000-b401cfff rw-    16384  
+    b401d000-b401dfff ---     4096  
+    b401e000-b411afff rw-  1036288  [stack:3770]
+    b411b000-b4172fff rw-   360448  anon_inode:dmabuf
+    b4173000-b4188fff rw-    90112  
+    b4189000-b418cfff rw-    16384  anon_inode:dmabuf
+    b418d000-b4190fff rw-    16384  anon_inode:dmabuf
+    b4191000-b41affff rw-   126976  anon_inode:dmabuf
+    b41b0000-b41cefff rw-   126976  anon_inode:dmabuf
+    b41cf000-b41edfff rw-   126976  anon_inode:dmabuf
+    b41ee000-b420cfff rw-   126976  anon_inode:dmabuf
+    b420d000-b4210fff rw-    16384  anon_inode:dmabuf
+    b4211000-b4214fff rw-    16384  anon_inode:dmabuf
+    b4215000-b4250fff rw-   245760  anon_inode:dmabuf
+    b4251000-b428cfff rw-   245760  anon_inode:dmabuf
+    b428d000-b42c8fff rw-   245760  anon_inode:dmabuf
+    b42c9000-b4304fff rw-   245760  anon_inode:dmabuf
+    b4305000-b4308fff rw-    16384  anon_inode:dmabuf
+    b4309000-b430afff rw-     8192  
+    b430b000-b430bfff ---     4096  
+    b430c000-b4408fff rw-  1036288  [stack:445]
+    b4409000-b4412fff rw-    40960  
+    b4413000-b4413fff ---     4096  
+    b4414000-b4510fff rw-  1036288  [stack:374]
+    b4511000-b4511fff ---     4096  
+    b4512000-b460efff rw-  1036288  [stack:373]
+    b460f000-b460ffff ---     4096  
+    b4610000-b470cfff rw-  1036288  [stack:372]
+    b470d000-b470dfff ---     4096  
+    b470e000-b480afff rw-  1036288  [stack:371]
+    b480b000-b480bfff ---     4096  
+    b480c000-b4908fff rw-  1036288  [stack:370]
+    b4909000-b490afff rw-     8192  
+    b490b000-b490bfff ---     4096  
+    b490c000-b4a08fff rw-  1036288  [stack:368]
+    b4a09000-b4a0afff rw-     8192  
+    b4a0b000-b4a0bfff ---     4096  
+    b4a0c000-b4b08fff rw-  1036288  [stack:366]
+    b4b09000-b4b48fff rw-   262144  /dev/mali
+    b4b49000-b4b4afff rw-     8192  
+    b4b4b000-b4b4bfff ---     4096  
+    b4b4c000-b4c48fff rw-  1036288  [stack:335]
+    b4c49000-b4c4afff rw-     8192  
+    b4c4b000-b4c4bfff ---     4096  
+    b4c4c000-b4d48fff rw-  1036288  [stack:334]
+    b4d49000-b4d4afff rw-     8192  
+    b4d4b000-b4d4bfff ---     4096  
+    b4d4c000-b4e48fff rw-  1036288  [stack:333]
+    b4e49000-b4e4afff rw-     8192  
+    b4e4b000-b4e4bfff ---     4096  
+    b4e4c000-b4f48fff rw-  1036288  [stack:332]
+    b4f49000-b4f4afff rw-     8192  
+    b4f4b000-b4f4bfff ---     4096  
+    b4f4c000-b5048fff rw-  1036288  [stack:331]
+    b5049000-b504dfff r-x    20480  /system/lib/libnativehelper.so
+    b504e000-b504efff r--     4096  /system/lib/libnativehelper.so
+    b504f000-b504ffff rw-     4096  /system/lib/libnativehelper.so
+    b5050000-b5051fff r-x     8192  /system/lib/libperfservicenative.so
+    b5052000-b5052fff r--     4096  /system/lib/libperfservicenative.so
+    b5053000-b5053fff rw-     4096  /system/lib/libperfservicenative.so
+    b5054000-b5056fff r-x    12288  /system/lib/libwpa_client.so
+    b5057000-b5057fff r--     4096  /system/lib/libwpa_client.so
+    b5058000-b5058fff rw-     4096  /system/lib/libwpa_client.so
+    b5059000-b5059fff rw-     4096  
+    b505a000-b505efff r-x    20480  /system/lib/libhardware_legacy.so
+    b505f000-b505ffff r--     4096  /system/lib/libhardware_legacy.so
+    b5060000-b5060fff rw-     4096  /system/lib/libhardware_legacy.so
+    b5061000-b5061fff rw-     4096  
+    b5062000-b5075fff r-x    81920  /system/lib/libgui_ext.so
+    b5076000-b5076fff ---     4096  
+    b5077000-b5079fff r--    12288  /system/lib/libgui_ext.so
+    b507a000-b507afff rw-     4096  /system/lib/libgui_ext.so
+    b507b000-b5082fff r-x    32768  /system/lib/libnetutils.so
+    b5083000-b5083fff r--     4096  /system/lib/libnetutils.so
+    b5084000-b5084fff rw-     4096  /system/lib/libnetutils.so
+    b5085000-b5088fff r-x    16384  /system/lib/libbwc.so
+    b5089000-b5089fff r--     4096  /system/lib/libbwc.so
+    b508a000-b508afff rw-     4096  /system/lib/libbwc.so
+    b508b000-b50a4fff r-x   106496  /system/lib/hw/hwcomposer.mt6582.so
+    b50a5000-b50a5fff ---     4096  
+    b50a6000-b50a7fff r--     8192  /system/lib/hw/hwcomposer.mt6582.so
+    b50a8000-b50a8fff rw-     4096  /system/lib/hw/hwcomposer.mt6582.so
+    b50a9000-b50a9fff rw-     4096  
+    b50aa000-b5b35fff rw-  11059200  /dev/graphics/fb0
+    b5b36000-b5b3bfff r-x    24576  /system/lib/hw/gralloc.mt6582.so
+    b5b3c000-b5b3cfff r--     4096  /system/lib/hw/gralloc.mt6582.so
+    b5b3d000-b5b3dfff rw-     4096  /system/lib/hw/gralloc.mt6582.so
+    b5b3e000-b5b3ffff rw-     8192  
+    b5b40000-b5b40fff ---     4096  
+    b5b41000-b5c3dfff rw-  1036288  [stack:323]
+    b5c3e000-b5c3ffff rw-     8192  
+    b5c40000-b5c40fff ---     4096  
+    b5c41000-b5d3dfff rw-  1036288  [stack:322]
+    b5d3e000-b5d3ffff rw-     8192  
+    b5d40000-b5d40fff ---     4096  
+    b5d41000-b5e3dfff rw-  1036288  [stack:321]
+    b5e3e000-b5e58fff rw-   110592  
+    b5e59000-b5e59fff ---     4096  
+    b5e5a000-b5f56fff rw-  1036288  [stack:320]
+    b5f57000-b5f5bfff r-x    20480  /system/lib/egl/libGLESv2_mali.so
+    b5f5c000-b5f5cfff ---     4096  
+    b5f5d000-b5f5dfff r--     4096  /system/lib/egl/libGLESv2_mali.so
+    b5f5e000-b5f5efff rw-     4096  /system/lib/egl/libGLESv2_mali.so
+    b5f5f000-b5f64fff r-x    24576  /system/lib/egl/libGLESv1_CM_mali.so
+    b5f65000-b5f65fff r--     4096  /system/lib/egl/libGLESv1_CM_mali.so
+    b5f66000-b5f66fff rw-     4096  /system/lib/egl/libGLESv1_CM_mali.so
+    b5f67000-b5f67fff r-x     4096  /system/lib/libmtk_mali_user.so
+    b5f68000-b5f68fff r--     4096  /system/lib/libmtk_mali_user.so
+    b5f69000-b5f69fff rw-     4096  /system/lib/libmtk_mali_user.so
+    b5f6a000-b5f6cfff r-x    12288  /system/lib/libmtk_drvb.so
+    b5f6d000-b5f6dfff r--     4096  /system/lib/libmtk_drvb.so
+    b5f6e000-b5f6efff rw-     4096  /system/lib/libmtk_drvb.so
+    b5f6f000-b5f70fff r--     8192  
+    b5f71000-b607bfff r-x  1093632  /system/lib/libMali.so
+    b607c000-b607cfff ---     4096  
+    b607d000-b607ffff r--    12288  /system/lib/libMali.so
+    b6080000-b6082fff rw-    12288  /system/lib/libMali.so
+    b6083000-b6085fff r-x    12288  /system/lib/egl/libEGL_mali.so
+    b6086000-b6086fff r--     4096  /system/lib/egl/libEGL_mali.so
+    b6087000-b6087fff rw-     4096  /system/lib/egl/libEGL_mali.so
+    b6088000-b608bfff rw-    16384  
+    b608c000-b608cfff ---     4096  
+    b608d000-b6189fff rw-  1036288  [stack:290]
+    b618a000-b618bfff rw-     8192  
+    b618c000-b618cfff ---     4096  
+    b618d000-b6289fff rw-  1036288  [stack:289]
+    b628a000-b628afff ---     4096  
+    b628b000-b6387fff rw-  1036288  [stack:288]
+    b6388000-b6485fff r--  1040384  /dev/binder
+    b6486000-b6486fff r-x     4096  /system/lib/libnetd_client.so
+    b6487000-b6487fff r--     4096  /system/lib/libnetd_client.so
+    b6488000-b6488fff rw-     4096  /system/lib/libnetd_client.so
+    b6489000-b64a8fff r--   131072  /dev/__properties__
+    b64a9000-b64dbfff r-x   208896  /system/lib/libmtkjpeg.so
+    b64dc000-b64dcfff r--     4096  /system/lib/libmtkjpeg.so
+    b64dd000-b64ddfff rw-     4096  /system/lib/libmtkjpeg.so
+    b64de000-b64defff r--     4096  
+    b64df000-b64e1fff r-x    12288  /system/lib/libSwJpgCodec.so
+    b64e2000-b64e2fff r--     4096  /system/lib/libSwJpgCodec.so
+    b64e3000-b64e3fff rw-     4096  /system/lib/libSwJpgCodec.so
+    b64e4000-b64e6fff r-x    12288  /system/lib/libGdmaScalerPipe.so
+    b64e7000-b64e7fff r--     4096  /system/lib/libGdmaScalerPipe.so
+    b64e8000-b64e8fff rw-     4096  /system/lib/libGdmaScalerPipe.so
+    b64e9000-b64e9fff rw-     4096  
+    b64ea000-b64eefff r-x    20480  /system/lib/libJpgDecPipe.so
+    b64ef000-b64effff r--     4096  /system/lib/libJpgDecPipe.so
+    b64f0000-b64f0fff rw-     4096  /system/lib/libJpgDecPipe.so
+    b64f1000-b64f1fff r-x     4096  /system/lib/libmhalImageCodec.so
+    b64f2000-b64f2fff r--     4096  /system/lib/libmhalImageCodec.so
+    b64f3000-b64f3fff rw-     4096  /system/lib/libmhalImageCodec.so
+    b64f4000-b6522fff r-x   192512  /system/lib/libjpeg.so
+    b6523000-b6523fff ---     4096  
+    b6524000-b6524fff r--     4096  /system/lib/libjpeg.so
+    b6525000-b6525fff rw-     4096  /system/lib/libjpeg.so
+    b6526000-b6621fff r-x  1032192  /system/lib/libicuuc.so
+    b6622000-b6622fff ---     4096  
+    b6623000-b662cfff r--    40960  /system/lib/libicuuc.so
+    b662d000-b662dfff rw-     4096  /system/lib/libicuuc.so
+    b662e000-b6631fff rw-    16384  
+    b6632000-b6635fff r-x    16384  /system/lib/libgabi++.so
+    b6636000-b6636fff r--     4096  /system/lib/libgabi++.so
+    b6637000-b6637fff rw-     4096  /system/lib/libgabi++.so
+    b6638000-b6784fff r-x  1363968  /system/lib/libicui18n.so
+    b6785000-b6785fff ---     4096  
+    b6786000-b678ffff r--    40960  /system/lib/libicui18n.so
+    b6790000-b6790fff rw-     4096  /system/lib/libicui18n.so
+    b6791000-b67e6fff r-x   352256  /system/lib/libft2.so
+    b67e7000-b67e7fff ---     4096  
+    b67e8000-b67e9fff r--     8192  /system/lib/libft2.so
+    b67ea000-b67eafff rw-     4096  /system/lib/libft2.so
+    b67eb000-b67fefff r-x    81920  /system/lib/libexpat.so
+    b67ff000-b6800fff r--     8192  /system/lib/libexpat.so
+    b6801000-b6801fff rw-     4096  /system/lib/libexpat.so
+    b6802000-b6804fff r-x    12288  /system/lib/libm4u.so
+    b6805000-b6805fff r--     4096  /system/lib/libm4u.so
+    b6806000-b6806fff rw-     4096  /system/lib/libm4u.so
+    b6807000-b6807fff r-x     4096  /system/lib/libion_mtk.so
+    b6808000-b6808fff r--     4096  /system/lib/libion_mtk.so
+    b6809000-b6809fff rw-     4096  /system/lib/libion_mtk.so
+    b680a000-b680afff r-x     4096  /system/lib/libion.so
+    b680b000-b680bfff r--     4096  /system/lib/libion.so
+    b680c000-b680cfff rw-     4096  /system/lib/libion.so
+    b680d000-b6851fff r-x   282624  /system/lib/libdpframework.so
+    b6852000-b6855fff r--    16384  /system/lib/libdpframework.so
+    b6856000-b6856fff rw-     4096  /system/lib/libdpframework.so
+    b6857000-b6b75fff r-x  3272704  /system/lib/libskia.so
+    b6b76000-b6b76fff ---     4096  
+    b6b77000-b6b8dfff r--    94208  /system/lib/libskia.so
+    b6b8e000-b6b8ffff rw-     8192  /system/lib/libskia.so
+    b6b90000-b6b94fff rw-    20480  
+    b6b95000-b6b97fff r-x    12288  /system/lib/libpowermanager.so
+    b6b98000-b6b98fff r--     4096  /system/lib/libpowermanager.so
+    b6b99000-b6b99fff rw-     4096  /system/lib/libpowermanager.so
+    b6b9a000-b6b9cfff r-x    12288  /system/lib/libui_ext.so
+    b6b9d000-b6b9dfff ---     4096  
+    b6b9e000-b6b9efff r--     4096  /system/lib/libui_ext.so
+    b6b9f000-b6b9ffff rw-     4096  /system/lib/libui_ext.so
+    b6ba0000-b6bc5fff r-x   155648  /system/lib/libpng.so
+    b6bc6000-b6bc6fff ---     4096  
+    b6bc7000-b6bc7fff r--     4096  /system/lib/libpng.so
+    b6bc8000-b6bc8fff rw-     4096  /system/lib/libpng.so
+    b6bc9000-b6bd8fff r-x    65536  /system/lib/libui.so
+    b6bd9000-b6bdafff r--     8192  /system/lib/libui.so
+    b6bdb000-b6bdbfff rw-     4096  /system/lib/libui.so
+    b6bdc000-b6bdcfff r-x     4096  /system/lib/libsync.so
+    b6bdd000-b6bddfff r--     4096  /system/lib/libsync.so
+    b6bde000-b6bdefff rw-     4096  /system/lib/libsync.so
+    b6bdf000-b6c2bfff r-x   315392  /system/lib/libgui.so
+    b6c2c000-b6c2cfff ---     4096  
+    b6c2d000-b6c39fff r--    53248  /system/lib/libgui.so
+    b6c3a000-b6c3afff rw-     4096  /system/lib/libgui.so
+    b6c3b000-b6c3bfff r-x     4096  /system/lib/libhardware.so
+    b6c3c000-b6c3cfff r--     4096  /system/lib/libhardware.so
+    b6c3d000-b6c3dfff rw-     4096  /system/lib/libhardware.so
+    b6c3e000-b6c3ffff r-x     8192  /system/lib/libgralloc_extra.so
+    b6c40000-b6c40fff r--     4096  /system/lib/libgralloc_extra.so
+    b6c41000-b6c41fff rw-     4096  /system/lib/libgralloc_extra.so
+    b6c42000-b6c4afff r-x    36864  /system/lib/libGLESv2.so
+    b6c4b000-b6c4bfff r--     4096  /system/lib/libGLESv2.so
+    b6c4c000-b6c4cfff rw-     4096  /system/lib/libGLESv2.so
+    b6c4d000-b6c51fff r-x    20480  /system/lib/libGLESv1_CM.so
+    b6c52000-b6c52fff r--     4096  /system/lib/libGLESv1_CM.so
+    b6c53000-b6c53fff rw-     4096  /system/lib/libGLESv1_CM.so
+    b6c54000-b6cc1fff r-x   450560  /system/lib/libGLES_trace.so
+    b6cc2000-b6cc3fff r--     8192  /system/lib/libGLES_trace.so
+    b6cc4000-b6cc4fff rw-     4096  /system/lib/libGLES_trace.so
+    b6cc5000-b6d21fff r-x   380928  /system/lib/libEGL.so
+    b6d22000-b6d22fff ---     4096  
+    b6d23000-b6d24fff r--     8192  /system/lib/libEGL.so
+    b6d25000-b6d2dfff rw-    36864  /system/lib/libEGL.so
+    b6d2e000-b6d30fff rw-    12288  
+    b6d31000-b6d64fff r-x   212992  /system/lib/libsurfaceflinger.so
+    b6d65000-b6d65fff ---     4096  
+    b6d66000-b6d6afff r--    20480  /system/lib/libsurfaceflinger.so
+    b6d6b000-b6d6bfff rw-     4096  /system/lib/libsurfaceflinger.so
+    b6d6c000-b6d83fff r-x    98304  /system/lib/libz.so
+    b6d84000-b6d84fff r--     4096  /system/lib/libz.so
+    b6d85000-b6d85fff rw-     4096  /system/lib/libz.so
+    b6d86000-b6d91fff r-x    49152  /system/lib/libselinux.so
+    b6d92000-b6d92fff r--     4096  /system/lib/libselinux.so
+    b6d93000-b6d93fff rw-     4096  /system/lib/libselinux.so
+    b6d94000-b6d94fff r--     4096  /proc/xlog/setfil
+    b6d95000-b6da5fff r-x    69632  /system/lib/libaed.so
+    b6da6000-b6da6fff r--     4096  /system/lib/libaed.so
+    b6da7000-b6da7fff rw-     4096  /system/lib/libaed.so
+    b6da8000-b6da8fff r--     4096  
+    b6da9000-b6daafff r-x     8192  /system/lib/libunwind-ptrace.so
+    b6dab000-b6dabfff r--     4096  /system/lib/libunwind-ptrace.so
+    b6dac000-b6dacfff rw-     4096  /system/lib/libunwind-ptrace.so
+    b6dad000-b6dadfff r--     4096  
+    b6dae000-b6db9fff r-x    49152  /system/lib/libunwind.so
+    b6dba000-b6dbafff r--     4096  /system/lib/libunwind.so
+    b6dbb000-b6dbbfff rw-     4096  /system/lib/libunwind.so
+    b6dbc000-b6e01fff rw-   286720  
+    b6e02000-b6e38fff r-x   225280  /system/lib/libstlport.so
+    b6e39000-b6e3bfff r--    12288  /system/lib/libstlport.so
+    b6e3c000-b6e3cfff rw-     4096  /system/lib/libstlport.so
+    b6e3d000-b6e40fff r-x    16384  /system/lib/libgccdemangle.so
+    b6e41000-b6e41fff ---     4096  
+    b6e42000-b6e42fff r--     4096  /system/lib/libgccdemangle.so
+    b6e43000-b6e43fff rw-     4096  /system/lib/libgccdemangle.so
+    b6e44000-b6e44fff r--     4096  /proc/xlog/setfil
+    b6e45000-b6e4afff r-x    24576  /system/lib/libbacktrace.so
+    b6e4b000-b6e4bfff r--     4096  /system/lib/libbacktrace.so
+    b6e4c000-b6e4cfff rw-     4096  /system/lib/libbacktrace.so
+    b6e4d000-b6e62fff r-x    90112  /system/lib/libutils.so
+    b6e63000-b6e63fff r--     4096  /system/lib/libutils.so
+    b6e64000-b6e64fff rw-     4096  /system/lib/libutils.so
+    b6e65000-b6e70fff r-x    49152  /system/lib/libcutils.so
+    b6e71000-b6e71fff r--     4096  /system/lib/libcutils.so
+    b6e72000-b6e72fff rw-     4096  /system/lib/libcutils.so
+    b6e73000-b6e99fff r-x   159744  /system/lib/libbinder.so
+    b6e9a000-b6e9afff ---     4096  
+    b6e9b000-b6ea1fff r--    28672  /system/lib/libbinder.so
+    b6ea2000-b6ea2fff rw-     4096  /system/lib/libbinder.so
+    b6ea3000-b6ea4fff r-x     8192  /system/lib/libstdc++.so
+    b6ea5000-b6ea5fff r--     4096  /system/lib/libstdc++.so
+    b6ea6000-b6ea6fff rw-     4096  /system/lib/libstdc++.so
+    b6ea7000-b6ebffff r-x   102400  /system/lib/libm.so
+    b6ec0000-b6ec0fff r--     4096  /system/lib/libm.so
+    b6ec1000-b6ec1fff rw-     4096  /system/lib/libm.so
+    b6ec2000-b6ec2fff r--     4096  
+    b6ec3000-b6ec7fff r-x    20480  /system/lib/liblog.so
+    b6ec8000-b6ec8fff r--     4096  /system/lib/liblog.so
+    b6ec9000-b6ec9fff rw-     4096  /system/lib/liblog.so
+    b6eca000-b6ecafff r--     4096  
+    b6ecb000-b6f1ffff r-x   348160  /system/lib/libc.so
+    b6f20000-b6f22fff r--    12288  /system/lib/libc.so
+    b6f23000-b6f25fff rw-    12288  /system/lib/libc.so
+    b6f26000-b6f2efff rw-    36864  
+    b6f2f000-b6f2ffff r--     4096  
+    b6f30000-b6f30fff r-x     4096  /system/lib/libsigchain.so
+    b6f31000-b6f31fff r--     4096  /system/lib/libsigchain.so
+    b6f32000-b6f32fff rw-     4096  /system/lib/libsigchain.so
+    b6f33000-b6f33fff rw-     4096  
+    b6f34000-b6f34fff r--     4096  
+    b6f35000-b6f36fff rw-     8192  
+    b6f37000-b6f37fff r-x     4096  [sigpage]
+    b6f38000-b6f44fff r-x    53248  /system/bin/linker
+    b6f45000-b6f45fff r--     4096  /system/bin/linker
+    b6f46000-b6f46fff rw-     4096  /system/bin/linker
+    b6f47000-b6f47fff rw-     4096  
+    b6f48000-b6f48fff r-x     4096  /system/bin/surfaceflinger
+    b6f49000-b6f49fff r--     4096  /system/bin/surfaceflinger
+    b6f4a000-b6f4afff rw-     4096  
+    b8304000-b83d5fff rw-   860160  [heap]
+    bedce000-bedeefff rw-   135168  [stack]
+    ffff0000-ffff0fff r-x     4096  [vectors]
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 133, name: surfaceflinger  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d108  /system/lib/libc.so (__ioctl+8)
+    #01 pc 00042d5d  /system/lib/libc.so (ioctl+14)
+    #02 pc 0001f39f  /system/lib/libbinder.so (android::IPCThreadState::talkWithDriver(bool)+138)
+    #03 pc 0001f9ab  /system/lib/libbinder.so (android::IPCThreadState::waitForResponse(android::Parcel*, int*)+42)
+    #04 pc 0001fb4d  /system/lib/libbinder.so (android::IPCThreadState::transact(int, unsigned int, android::Parcel const&, android::Parcel*, unsigned int)+124)
+    #05 pc 0001ad35  /system/lib/libbinder.so (android::BpBinder::transact(unsigned int, android::Parcel const&, android::Parcel*, unsigned int)+36)
+    #06 pc 00039327  /system/lib/libgui.so
+    #07 pc 00026593  /system/lib/libsurfaceflinger.so
+    #08 pc 0001af8f  /system/lib/libsurfaceflinger.so
+    #09 pc 0001a7ff  /system/lib/libsurfaceflinger.so
+    #10 pc 00019375  /system/lib/libsurfaceflinger.so
+    #11 pc 000190d7  /system/lib/libsurfaceflinger.so
+    #12 pc 00012a27  /system/lib/libutils.so (android::Looper::pollInner(int)+410)
+    #13 pc 00012b19  /system/lib/libutils.so (android::Looper::pollOnce(int, int*, int*, void**)+92)
+    #14 pc 00016785  /system/lib/libsurfaceflinger.so
+    #15 pc 00018cb1  /system/lib/libsurfaceflinger.so (android::SurfaceFlinger::run()+8)
+    #16 pc 0000083d  /system/bin/surfaceflinger
+    #17 pc 000123d5  /system/lib/libc.so (__libc_init+44)
+    #18 pc 000008d8  /system/bin/surfaceflinger
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 133: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 288, name: Binder_1  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d108  /system/lib/libc.so (__ioctl+8)
+    #01 pc 00042d5d  /system/lib/libc.so (ioctl+14)
+    #02 pc 0001f39f  /system/lib/libbinder.so (android::IPCThreadState::talkWithDriver(bool)+138)
+    #03 pc 0001f88f  /system/lib/libbinder.so (android::IPCThreadState::getAndExecuteCommand()+6)
+    #04 pc 0001f8f1  /system/lib/libbinder.so (android::IPCThreadState::joinThreadPool(bool)+48)
+    #05 pc 00023af7  /system/lib/libbinder.so
+    #06 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #07 pc 00010577  /system/lib/libutils.so
+    #08 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #09 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 288: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 289, name: DispSync  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00010a21  /system/lib/libsurfaceflinger.so
+    #03 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #04 pc 00010577  /system/lib/libutils.so
+    #05 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #06 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 289: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 290, name: Binder_2  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d108  /system/lib/libc.so (__ioctl+8)
+    #01 pc 00042d5d  /system/lib/libc.so (ioctl+14)
+    #02 pc 0001f39f  /system/lib/libbinder.so (android::IPCThreadState::talkWithDriver(bool)+138)
+    #03 pc 0001f88f  /system/lib/libbinder.so (android::IPCThreadState::getAndExecuteCommand()+6)
+    #04 pc 0001f8f1  /system/lib/libbinder.so (android::IPCThreadState::joinThreadPool(bool)+48)
+    #05 pc 00023af7  /system/lib/libbinder.so
+    #06 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #07 pc 00010577  /system/lib/libutils.so
+    #08 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #09 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 290: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 320, name: arch_worker  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d108  /system/lib/libc.so (__ioctl+8)
+    #01 pc 00042d5d  /system/lib/libc.so (ioctl+14)
+    #02 pc 00073438  /system/lib/libMali.so
+    #03 pc 000739ec  /system/lib/libMali.so
+    #04 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #05 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 320: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 321, name: surfaceflinger  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003dc4c  /system/lib/libc.so (__rt_sigtimedwait+12)
+    #01 pc 00015a47  /system/lib/libc.so (__timer_thread_start(void*)+40)
+    #02 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #03 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 321: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 322, name: SWD-GPU Job  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00072df4  /system/lib/libMali.so
+    #03 pc 0006d8a8  /system/lib/libMali.so
+    #04 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #05 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 322: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 323, name: SWD-Frame  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00072df4  /system/lib/libMali.so
+    #03 pc 0006d8a8  /system/lib/libMali.so
+    #04 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #05 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 323: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 331, name: VSyncThreadHWC  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00011e3b  /system/lib/hw/hwcomposer.mt6582.so (VSyncThread::threadLoop()+42)
+    #03 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #04 pc 00010577  /system/lib/libutils.so
+    #05 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #06 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 331: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 332, name: UEventThreadHWC  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d76c  /system/lib/libc.so (__ppoll+16)
+    #01 pc 000158a9  /system/lib/libc.so (poll+32)
+    #02 pc 00012051  /system/lib/hw/hwcomposer.mt6582.so (UEventThread::threadLoop()+28)
+    #03 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #04 pc 00010577  /system/lib/libutils.so
+    #05 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #06 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 332: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 333, name: UIComposeThread  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 000169b3  /system/lib/libc.so (__futex_wait_ex+42)
+    #02 pc 000431c1  /system/lib/libc.so (sem_wait+50)
+    #03 pc 0000fb0b  /system/lib/hw/hwcomposer.mt6582.so (ComposeThreadBase::threadLoop()+10)
+    #04 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #05 pc 00010577  /system/lib/libutils.so
+    #06 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #07 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 333: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 334, name: MMComposeThread  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 000169b3  /system/lib/libc.so (__futex_wait_ex+42)
+    #02 pc 000431c1  /system/lib/libc.so (sem_wait+50)
+    #03 pc 0000fb0b  /system/lib/hw/hwcomposer.mt6582.so (ComposeThreadBase::threadLoop()+10)
+    #04 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #05 pc 00010577  /system/lib/libutils.so
+    #06 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #07 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 334: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 335, name: HWCDispatchThre  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 000169b3  /system/lib/libc.so (__futex_wait_ex+42)
+    #02 pc 000431c1  /system/lib/libc.so (sem_wait+50)
+    #03 pc 0000f053  /system/lib/hw/hwcomposer.mt6582.so (HWCDispatcher::threadLoop()+18)
+    #04 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #05 pc 00010577  /system/lib/libutils.so
+    #06 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #07 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 335: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 366, name: Swap Worker  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00072df4  /system/lib/libMali.so
+    #03 pc 0006d8a8  /system/lib/libMali.so
+    #04 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #05 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 366: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 370, name: surfaceflinger  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003dc4c  /system/lib/libc.so (__rt_sigtimedwait+12)
+    #01 pc 00015a47  /system/lib/libc.so (__timer_thread_start(void*)+40)
+    #02 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #03 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 370: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 371, name: EventThread  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00011ceb  /system/lib/libsurfaceflinger.so
+    #03 pc 0001198b  /system/lib/libsurfaceflinger.so
+    #04 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #05 pc 00010577  /system/lib/libutils.so
+    #06 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #07 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 371: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 372, name: surfaceflinger  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003dc4c  /system/lib/libc.so (__rt_sigtimedwait+12)
+    #01 pc 00015a47  /system/lib/libc.so (__timer_thread_start(void*)+40)
+    #02 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #03 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 372: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 373, name: EventThread  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00011ceb  /system/lib/libsurfaceflinger.so
+    #03 pc 0001198b  /system/lib/libsurfaceflinger.so
+    #04 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #05 pc 00010577  /system/lib/libutils.so
+    #06 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #07 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 373: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 374, name: EventControl  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 00016019  /system/lib/libc.so (__pthread_cond_timedwait_relative(pthread_cond_t*, pthread_mutex_t*, timespec const*)+56)
+    #02 pc 00011373  /system/lib/libsurfaceflinger.so
+    #03 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #04 pc 00010577  /system/lib/libutils.so
+    #05 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #06 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 374: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 445, name: Binder_3  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d108  /system/lib/libc.so (__ioctl+8)
+    #01 pc 00042d5d  /system/lib/libc.so (ioctl+14)
+    #02 pc 0001f39f  /system/lib/libbinder.so (android::IPCThreadState::talkWithDriver(bool)+138)
+    #03 pc 0001f88f  /system/lib/libbinder.so (android::IPCThreadState::getAndExecuteCommand()+6)
+    #04 pc 0001f8f1  /system/lib/libbinder.so (android::IPCThreadState::joinThreadPool(bool)+48)
+    #05 pc 00023af7  /system/lib/libbinder.so
+    #06 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #07 pc 00010577  /system/lib/libutils.so
+    #08 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #09 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 445: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 1655, name: Binder_4  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d108  /system/lib/libc.so (__ioctl+8)
+    #01 pc 00042d5d  /system/lib/libc.so (ioctl+14)
+    #02 pc 0001f39f  /system/lib/libbinder.so (android::IPCThreadState::talkWithDriver(bool)+138)
+    #03 pc 0001f88f  /system/lib/libbinder.so (android::IPCThreadState::getAndExecuteCommand()+6)
+    #04 pc 0001f8f1  /system/lib/libbinder.so (android::IPCThreadState::joinThreadPool(bool)+48)
+    #05 pc 00023af7  /system/lib/libbinder.so
+    #06 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #07 pc 00010577  /system/lib/libutils.so
+    #08 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #09 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 1655: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 1681, name: Binder_5  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 0003d108  /system/lib/libc.so (__ioctl+8)
+    #01 pc 00042d5d  /system/lib/libc.so (ioctl+14)
+    #02 pc 0001f39f  /system/lib/libbinder.so (android::IPCThreadState::talkWithDriver(bool)+138)
+    #03 pc 0001f88f  /system/lib/libbinder.so (android::IPCThreadState::getAndExecuteCommand()+6)
+    #04 pc 0001f8f1  /system/lib/libbinder.so (android::IPCThreadState::joinThreadPool(bool)+48)
+    #05 pc 00023af7  /system/lib/libbinder.so
+    #06 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #07 pc 00010577  /system/lib/libutils.so
+    #08 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #09 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 1681: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 3770, name: UIComposeThread  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 000169b3  /system/lib/libc.so (__futex_wait_ex+42)
+    #02 pc 000431c1  /system/lib/libc.so (sem_wait+50)
+    #03 pc 0000fb0b  /system/lib/hw/hwcomposer.mt6582.so (ComposeThreadBase::threadLoop()+10)
+    #04 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #05 pc 00010577  /system/lib/libutils.so
+    #06 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #07 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 3770: No such process
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 133, tid: 3771, name: MMComposeThread  >>> /system/bin/surfaceflinger <<<
+cannot get registers: No such process
+
+backtrace:
+    #00 pc 00012980  /system/lib/libc.so (syscall+28)
+    #01 pc 000169b3  /system/lib/libc.so (__futex_wait_ex+42)
+    #02 pc 000431c1  /system/lib/libc.so (sem_wait+50)
+    #03 pc 0000fb0b  /system/lib/hw/hwcomposer.mt6582.so (ComposeThreadBase::threadLoop()+10)
+    #04 pc 00010a09  /system/lib/libutils.so (android::Thread::_threadLoop(void*)+112)
+    #05 pc 00010577  /system/lib/libutils.so
+    #06 pc 00016147  /system/lib/libc.so (__pthread_start(void*)+30)
+    #07 pc 00014207  /system/lib/libc.so (__start_thread+6)
+
+stack:
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+         ........  ........
+cannot get siginfo for 3771: No such process
+

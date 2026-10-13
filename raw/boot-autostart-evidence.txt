@@ -1,0 +1,30 @@
+D/PackageManager(  618): Replace existing pacakge: com.jiushouji.kiosktest
+D/PackageManager(  618): Existing package: PackageSetting{2db16ba com.jiushouji.kiosktest/10056}
+D/PackageManager(  618): Renaming /data/app/vmdl1782181227.tmp to /data/app/com.jiushouji.kiosktest-1
+D/PackageManager(  618): replacePackageLI: new=Package{611896b com.jiushouji.kiosktest}, old=Package{21184cc8 com.jiushouji.kiosktest}
+D/PackageManager(  618): replaceNonSystemPackageLI: new=Package{611896b com.jiushouji.kiosktest}, old=Package{21184cc8 com.jiushouji.kiosktest}
+D/PackageManager(  618): deletePackageLI: com.jiushouji.kiosktest user null
+D/PackageManager(  618): Removing non-system package:com.jiushouji.kiosktest
+D/PackageManager(  618): removePackageDataLI: PackageSetting{2db16ba com.jiushouji.kiosktest/10056}
+I/ActivityManager(  618): Force stopping com.jiushouji.kiosktest appid=10056 user=-1: uninstall pkg
+I/ActivityManager(  618): Killing 1354:com.jiushouji.kiosktest/u0a56 (adj 0): stop com.jiushouji.kiosktest
+I/WindowState(  618): WIN DEATH: Window{39dc3f1d u0 com.jiushouji.kiosktest/com.jiushouji.kiosktest.MainActivity}
+I/ActivityManager(  618):   Force finishing activity ActivityRecord{34f08418 u0 com.jiushouji.kiosktest/.MainActivity t21}
+V/WindowManager(  618): Changing focus from Window{39dc3f1d u0 com.jiushouji.kiosktest/com.jiushouji.kiosktest.MainActivity} to null Callers=com.android.server.wm.WindowManagerService.removeWindowLocked:2982 com.android.server.wm.WindowState$DeathRecipient.binderDied:1120 android.os.BinderProxy.sendDeathNotice:554 <bottom of call stack> 
+I/PackageManager(  618): Package com.jiushouji.kiosktest codePath changed from /data/app/com.jiushouji.kiosktest-2 to /data/app/com.jiushouji.kiosktest-1; Retaining data and using new
+I/WindowManager(  618): Losing focus: Window{39dc3f1d u0 com.jiushouji.kiosktest/com.jiushouji.kiosktest.MainActivity}
+I/PackageManager(  618): Linking native library dir for /data/app/com.jiushouji.kiosktest-1
+I/PackageManager(  618): Perform pre-dex opt for package: com.jiushouji.kiosktest
+I/PackageManager(  618): Running dexopt on: /data/app/com.jiushouji.kiosktest-1/base.apk pkg=com.jiushouji.kiosktest isa=arm vmSafeMode=false
+W/ActivityManager(  618): Spurious death for ProcessRecord{273bae3 1354:com.jiushouji.kiosktest/u0a56}, curProc for 1354: null
+I/PackageManager(  618): Dexopt done on: com.jiushouji.kiosktest
+W/PackageManager(  618): Code path for pkg : com.jiushouji.kiosktest changing from /data/app/com.jiushouji.kiosktest-2 to /data/app/com.jiushouji.kiosktest-1
+W/PackageManager(  618): Resource path for pkg : com.jiushouji.kiosktest changing from /data/app/com.jiushouji.kiosktest-2 to /data/app/com.jiushouji.kiosktest-1
+D/PackageManager(  618): New package installed in /data/app/com.jiushouji.kiosktest-1
+I/ActivityManager(  618): Force stopping com.jiushouji.kiosktest appid=10056 user=-1: update pkg
+V/ActivityManager(  618): Broadcast: Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:com.jiushouji.kiosktest flg=0x4000010 (has extras) } ordered=false userid=0 callerApp=null
+I/ActivityManager(  618): Force stopping com.jiushouji.kiosktest appid=10056 user=0: pkg removed
+V/ActivityManager(  618): Broadcast: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:com.jiushouji.kiosktest flg=0x4000010 (has extras) } ordered=false userid=0 callerApp=null
+V/ActivityManager(  618): Broadcast: Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:com.jiushouji.kiosktest flg=0x4000010 (has extras) } ordered=false userid=0 callerApp=null
+V/ActivityManager(  618): Broadcast: Intent { act=android.intent.action.MY_PACKAGE_REPLACED flg=0x4000010 pkg=com.jiushouji.kiosktest (has extras) } ordered=false userid=0 callerApp=null
+D/BackupManagerService(  618): Received broadcast Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:com.jiushouji.kiosktest flg=0x4000010 (has extras) }

@@ -1,0 +1,10 @@
+2026-10-13 16:46:07 SYSTEM_RESTART (text, 257 bytes)
+Build: alps/full_b906/b906:5.1/LRX21M/1691725749:user/test-keys
+Hardware: unknown
+Revision: 0
+Bootloader: unknown
+Radio: unknown
+Kernel: Linux version 3.10.54 (root@twd-PowerEdge-R720xd) (gcc version 4.8 (GCC) ) #9 SMP PREEMPT Tue Aug 15 17:34:00 CST 2023
+
+
+========================================

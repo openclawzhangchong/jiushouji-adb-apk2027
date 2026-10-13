@@ -1,0 +1,56 @@
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        1f6e56aa com.jiushouji.kiosktest/.MainActivity filter 20ecfe5e
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.HOME"
+          Category: "android.intent.category.DEFAULT"
+          Category: "android.intent.category.LAUNCHER"
+
+Receiver Resolver Table:
+  Non-Data Actions:
+      android.intent.action.QUICKBOOT_POWERON:
+        31dee29b com.jiushouji.kiosktest/.BootReceiver filter 3cc9ece0
+          Action: "android.intent.action.BOOT_COMPLETED"
+          Action: "android.intent.action.QUICKBOOT_POWERON"
+          mPriority=1000, mHasPartialTypes=false
+      android.app.action.DEVICE_ADMIN_ENABLED:
+        3d3e638 com.jiushouji.kiosktest/.AdminReceiver filter 3d664b99
+          Action: "android.app.action.DEVICE_ADMIN_ENABLED"
+      android.intent.action.BOOT_COMPLETED:
+        31dee29b com.jiushouji.kiosktest/.BootReceiver filter 3cc9ece0
+          Action: "android.intent.action.BOOT_COMPLETED"
+          Action: "android.intent.action.QUICKBOOT_POWERON"
+          mPriority=1000, mHasPartialTypes=false
+
+Key Set Manager:
+  [com.jiushouji.kiosktest]
+      Signing KeySets: 15
+
+Packages:
+  Package [com.jiushouji.kiosktest] (2db16ba):
+    userId=10056 gids=[]
+    pkg=Package{611896b com.jiushouji.kiosktest}
+    codePath=/data/app/com.jiushouji.kiosktest-1
+    resourcePath=/data/app/com.jiushouji.kiosktest-1
+    legacyNativeLibraryDir=/data/app/com.jiushouji.kiosktest-1/lib
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    versionCode=1 targetSdk=22
+    versionName=1.0
+    applicationInfo=ApplicationInfo{38ae4611 com.jiushouji.kiosktest}
+    flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    pkgFlagsEx=[ ]
+    dataDir=/data/data/com.jiushouji.kiosktest
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2026-10-13 16:56:43
+    firstInstallTime=2026-10-13 16:52:00
+    lastUpdateTime=2026-10-13 16:56:44
+    signatures=PackageSignatures{3db33376 [223f0d77]}
+    permissionsFixed=true haveGids=true installStatus=1
+    pkgFlags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    User 0:  installed=true hidden=false stopped=false notLaunched=false enabled=0
+    grantedPermissions:
+      android.permission.DISABLE_KEYGUARD
+      android.permission.RECEIVE_BOOT_COMPLETED
+      android.permission.WAKE_LOCK

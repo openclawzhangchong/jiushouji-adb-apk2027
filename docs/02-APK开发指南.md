@@ -313,7 +313,7 @@ public class BootReceiver extends BroadcastReceiver {
 | `pm set-home-activity` | ❌ **不存在** —— `pm` 子命令列表里没有这一项 |
 | `pm disable-user --user 0 com.android.launcher3` | ❌ **实测不可行** —— `SecurityException: Permission Denial: attempt to change component state from pid=…, uid=2000`。shell 用户**没有** `CHANGE_COMPONENT_ENABLED_STATE` 权限（详见下方） |
 | `am start -a android.intent.action.MAIN -c android.intent.category.HOME` | ⚠️ **会弹出桌面选择器，必须人工点一次「始终」**。当前系统只有 Launcher3 一个 HOME，所以现在调用它只是回桌面；等你的 APK 装上、变成第 2 个 HOME 后才会弹选择器 |
-| 方案 C 的 `dpm set-device-owner` | ✅ **实测权限检查通过** —— shell 有 `MANAGE_DEVICE_ADMINS`，用不存在的组件试探返回的是 `Unknown admin`（而非权限拒绝）。设成 Device Owner 后可调 `addPersistentPreferredActivity` **免人工**固定桌面 |
+| 方案 C 的 `dpm set-device-owner` | ✅✅ **已完整实测跑通** —— 真的设成了 Device Owner，LockTask 生效（按 Home/Back 退不出去）。详见 [`06-Kiosk可行性实测.md`](06-Kiosk可行性实测.md) |
 
 #### ⚠️ 关于 `pm disable-user` 的实测细节（重要）
 
@@ -397,9 +397,16 @@ startLockTask();
 ```
 
 **✅ 优点**：用户**无法退出**（Home/Back/Recent 全被接管），真正的 kiosk。
-**⚠️ 注意**：
-- 一旦设为 Device Owner，**必须恢复出厂设置才能清除**（`dpm remove-active-admin` 对 Device Owner 无效）
+**⚠️ 注意（均已实测验证）**：
+- 一旦设为 Device Owner，**必须恢复出厂设置才能清除**（`dpm remove-active-admin` 对 Device Owner 无效）。
+  实测 `pm uninstall` 会被拒绝：`Failure [DELETE_FAILED_DEVICE_POLICY_MANAGER]`
+- **恢复出厂设置会清除 ADB 授权密钥** → 设备重启后 `adb devices` 会变回 `unauthorized`，
+  需要在设备屏幕上重新点一次「允许」。批量部署时要把这一步算进去
 - `dpm set-device-owner` 要求设备上**没有已登录账号**——现在满足，但**以后登录了账号就设不了了**，建议先做这一步
+- ✅ 实测锁定效果：LockTask 生效后**按 Home / Back 键都无法退出应用**，
+  系统提示「屏幕处于固定状态。您所属的单位不允许取消固定。」
+
+> 完整实测过程与证据见 [`06-Kiosk可行性实测.md`](06-Kiosk可行性实测.md)。
 
 ---
 
@@ -687,8 +694,9 @@ adb shell input text "hello"
 adb shell am start -n com.example.jiushouji/.MainActivity
 adb shell am force-stop com.example.jiushouji
 
-# 手动触发开机广播测试（注意：stopped 状态的应用收不到）
-adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -p com.example.jiushouji
+# 手动触发开机广播测试（注意：5.1 的 am broadcast 【不支持 -p】，必须用 -n 指定组件）
+adb shell am broadcast -a android.intent.action.BOOT_COMPLETED \
+    -n com.example.jiushouji/.BootReceiver
 
 # 真实重启测试（最终验证必须用这个）
 adb reboot

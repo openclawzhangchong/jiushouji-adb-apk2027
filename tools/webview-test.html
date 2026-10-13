@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WebView Capability Test</title>
+<style>
+  body { font-family: monospace; font-size: 13px; margin: 4px; background:#fff; color:#000; }
+  h2 { font-size: 15px; margin: 2px 0 4px 0; }
+  .ua { font-size: 10px; color:#555; word-break: break-all; margin-bottom:4px; }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 1px 4px; border-bottom: 1px solid #eee; }
+  .ok { color: #0a0; font-weight: bold; }
+  .no { color: #c00; font-weight: bold; }
+</style>
+</head>
+<body>
+<h2 id="hdr">running...</h2>
+<div class="ua" id="ua"></div>
+<table id="t"></table>
+<script>
+var results = [];
+function T(name, fn) {
+  var r = false;
+  try { r = fn(); } catch (e) { r = false; }
+  results.push([name, !!r]);
+}
+function ES6(src) { try { eval(src); return true; } catch (e) { return false; } }
+
+/* ---- ES6+ 语法 ---- */
+T('let / const',        function(){ return ES6('let a=1; const b=2;'); });
+T('arrow function',     function(){ var f=eval('(function(){return (x=>x+1)(1)})'); return f()===2; });
+T('template literal',   function(){ var f=eval('(function(){return `a${1}b`})'); return f()==='a1b'; });
+T('class 语法',          function(){ var C=eval('(class A{constructor(){this.x=1}}'); return new C().x===1; });
+T('默认参数',            function(){ var f=eval('(function(x=5){return x})'); return f()===5; });
+T('解构赋值',            function(){ var f=eval('(function(){var {a}={a:7};return a})'); return f()===7; });
+T('展开运算符 ...',      function(){ var f=eval('(function(){return [...[1,2]].length})'); return f()===2; });
+T('generator',          function(){ return ES6('function* g(){}'); });
+T('async / await',      function(){ return ES6('async function a(){}'); });
+T('for...of',           function(){ return ES6('for(var x of [1]){}'); });
+
+/* ---- 内建对象 ---- */
+T('Promise',            function(){ return typeof Promise !== 'undefined'; });
+T('Promise.all',        function(){ return typeof Promise.all === 'function'; });
+T('Promise.finally',    function(){ return typeof Promise.prototype.finally === 'function'; });
+T('Symbol',             function(){ return typeof Symbol !== 'undefined'; });
+T('Map / Set',          function(){ return typeof Map !== 'undefined' && typeof Set !== 'undefined'; });
+T('Proxy',              function(){ return typeof Proxy !== 'undefined'; });
+T('BigInt',             function(){ return typeof BigInt !== 'undefined'; });
+T('WeakMap',            function(){ return typeof WeakMap !== 'undefined'; });
+T('Reflect',            function(){ return typeof Reflect !== 'undefined'; });
+
+/* ---- 标准库方法 ---- */
+T('Object.assign',      function(){ return typeof Object.assign === 'function'; });
+T('Object.entries',     function(){ return typeof Object.entries === 'function'; });
+T('Object.values',      function(){ return typeof Object.values === 'function'; });
+T('Array.from',         function(){ return typeof Array.from === 'function'; });
+T('Array.includes',     function(){ return typeof [].includes === 'function'; });
+T('Array.find',         function(){ return typeof [].find === 'function'; });
+T('String.includes',    function(){ return typeof ''.includes === 'function'; });
+T('String.padStart',    function(){ return typeof ''.padStart === 'function'; });
+T('Number.isInteger',   function(){ return typeof Number.isInteger === 'function'; });
+
+/* ---- Web API ---- */
+T('fetch()',            function(){ return typeof fetch === 'function'; });
+T('XMLHttpRequest',     function(){ return typeof XMLHttpRequest !== 'undefined'; });
+T('WebSocket',          function(){ return typeof WebSocket !== 'undefined'; });
+T('localStorage',       function(){ return typeof localStorage !== 'undefined'; });
+T('sessionStorage',     function(){ return typeof sessionStorage !== 'undefined'; });
+T('URLSearchParams',    function(){ return typeof URLSearchParams !== 'undefined'; });
+T('TextEncoder',        function(){ return typeof TextEncoder !== 'undefined'; });
+T('Intl',               function(){ return typeof Intl !== 'undefined'; });
+T('Intl.DateTimeFormat',function(){ return typeof Intl !== 'undefined' && typeof Intl.DateTimeFormat === 'function'; });
+T('requestAnimationFrame', function(){ return typeof requestAnimationFrame === 'function'; });
+T('IntersectionObserver',  function(){ return typeof IntersectionObserver !== 'undefined'; });
+T('ResizeObserver',        function(){ return typeof ResizeObserver !== 'undefined'; });
+T('MutationObserver',      function(){ return typeof MutationObserver !== 'undefined'; });
+T('JSON',               function(){ return typeof JSON !== 'undefined'; });
+T('atob / btoa',        function(){ return typeof atob === 'function' && typeof btoa === 'function'; });
+
+/* ---- Canvas ---- */
+T('canvas 2d',          function(){ return !!document.createElement('canvas').getContext('2d'); });
+T('canvas webgl',       function(){ return !!document.createElement('canvas').getContext('webgl'); });
+
+/* ---- CSS ---- */
+T('CSS.supports()',     function(){ return typeof CSS !== 'undefined' && typeof CSS.supports === 'function'; });
+T('CSS flexbox',        function(){ return typeof CSS!=='undefined' && CSS.supports && CSS.supports('display','flex'); });
+T('CSS Grid',           function(){ return typeof CSS!=='undefined' && CSS.supports && CSS.supports('display','grid'); });
+T('CSS var(--x)',       function(){ return typeof CSS!=='undefined' && CSS.supports && CSS.supports('color','var(--x)'); });
+T('CSS calc()',         function(){ return typeof CSS!=='undefined' && CSS.supports && CSS.supports('width','calc(1px + 1px)'); });
+T('CSS transform',      function(){ return typeof CSS!=='undefined' && CSS.supports && CSS.supports('transform','translateX(1px)'); });
+T('CSS position:sticky',function(){ return typeof CSS!=='undefined' && CSS.supports && CSS.supports('position','sticky'); });
+
+/* ---- 渲染 ---- */
+var ok = 0, i;
+for (i = 0; i < results.length; i++) { if (results[i][1]) ok++; }
+var t = document.getElementById('t');
+for (i = 0; i < results.length; i++) {
+  var r = results[i];
+  var tr = document.createElement('tr');
+  var td1 = document.createElement('td');
+  td1.textContent = r[0];
+  var td2 = document.createElement('td');
+  td2.textContent = r[1] ? 'PASS' : 'FAIL';
+  td2.className = r[1] ? 'ok' : 'no';
+  tr.appendChild(td1); tr.appendChild(td2); t.appendChild(tr);
+}
+document.getElementById('ua').textContent = 'UA: ' + navigator.userAgent;
+document.getElementById('hdr').textContent = 'RESULT: ' + ok + ' / ' + results.length + ' PASS';
+document.title = 'WebView ' + ok + '/' + results.length;
+</script>
+</body>
+</html>
