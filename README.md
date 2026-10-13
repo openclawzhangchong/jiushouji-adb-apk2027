@@ -56,9 +56,9 @@ adb shell am start -n com.example.jiushouji/.MainActivity
 | [04 · WebView 兼容性实测](docs/04-WebView兼容性实测.md) | 前端 | **52 项特性检测**：WebView = Chrome 37，ES6 全线不可用 |
 | [05 · 稳定性事故报告](docs/05-稳定性事故报告.md) | 所有人 | SurfaceFlinger 看门狗崩溃 → 框架软重启的根因与规避 |
 | [03 · 连接与部署环境](docs/03-连接与部署环境.md) | 环境搭建 | Windows 侧 adb 安装、驱动、三层排错法 |
-| [`raw/`](raw/) | 需要原始数据 | 全部原始实测输出（getprop / 崩溃 tombstone / 日志…） |
-| [`tools/`](tools/) | 复现 | 测试 APK 源码与构建脚本、CPU 测试脚本、WebView 检测页 |
-| [`skills/`](skills/) | 自动化 | 「连接 + 诊断 + 设备画像」的可复用流程 |
+| [`raw/README.md`](raw/README.md) | 查证结论 | ★ **原始证据链索引**：每个文件证明哪条结论 |
+| [`tools/kiosk-test/README.md`](tools/kiosk-test/README.md) | 动手验证 | ★ **测试 APK 使用说明**：怎么装、怎么用、怎么恢复 |
+| [`skills/README.md`](skills/README.md) | 自动化 / 排错 | ★ **技能索引 + 真机探测方法速查** |
 
 > 👉 **要开始写代码的人：直接读 [07-开发任务书](docs/07-开发任务书.md)，
 > 参考实现看 [`tools/kiosk-test/`](tools/kiosk-test/)。**
@@ -143,24 +143,34 @@ jiushouji-adb-apk2027/
 │   ├── 03-连接与部署环境.md          adb 安装、驱动、排错
 │   ├── 04-WebView兼容性实测.md       52 项特性检测结果
 │   ├── 05-稳定性事故报告.md          SurfaceFlinger 崩溃根因
-│   └── 06-Kiosk可行性实测.md        ★★ 自建 APK 真机全流程验证
-├── raw/                            真机原始实测数据（只读，勿改）
+│   ├── 06-Kiosk可行性实测.md        ★★ 自建 APK 真机全流程验证
+│   └── 07-开发任务书.md             ★★★ 可直接下发给程序员
+├── raw/                            ★ 原始证据链（只读，勿改）
+│   ├── README.md                   证据链索引：每个文件证明哪条结论
 │   ├── getprop.txt / pm-list-*.txt
 │   ├── cpuinfo.txt / meminfo.txt / df.txt / mount.txt
 │   ├── sensorservice.txt / dumpsys-*.txt
-│   ├── cpu-hotplug-test-result.txt       CPU 负载复测输出
-│   ├── cpu-hotplug-governor-config.txt   hotplug 全部参数
-│   ├── dstate-threads.txt                loadavg 真相
-│   ├── shell-permissions.txt             shell 的 66 条权限
-│   ├── dropbox-*.txt                     SurfaceFlinger 崩溃取证
-│   ├── boot-autostart-evidence.txt       开机自启完整日志
-│   └── device-owner-state.txt            Device Owner 状态
+│   ├── cpu-hotplug-*.txt           CPU 负载复测
+│   ├── dstate-threads.txt          loadavg 真相
+│   ├── shell-permissions.txt       shell 的 66 条权限
+│   ├── pm-disable-user-denied.txt  禁用组件被拒
+│   ├── dpm-set-device-owner-probe.txt / device-owner-state.txt
+│   ├── dropbox-*.txt               SurfaceFlinger 崩溃取证
+│   ├── boot-autostart-evidence.txt 开机自启完整日志
+│   └── post-factory-reset-verification.txt  恢复出厂核对
 ├── tools/
-│   ├── cpu-hotplug-test.sh          CPU 热插拔测试脚本
-│   ├── webview-test.html            WebView 特性检测页
-│   └── kiosk-test/                  ★ 测试 APK 全部源码 + 构建脚本 + 已签名 APK
-├── skills/
-│   └── android-adb-connect/         连接 + 诊断 + 设备画像 流程
+│   ├── kiosk-test/                 ★ 测试 APK（源码 + 构建脚本 + 已签名 APK + 使用说明）
+│   │   ├── README.md               ★ 使用说明：怎么装、怎么用、怎么恢复
+│   │   ├── src/ AndroidManifest.xml res/ build.sh
+│   │   └── kiosk-test-signed.apk
+│   ├── cpu-hotplug-test.sh         CPU 热插拔测试脚本
+│   ├── webview-test.html           WebView 特性检测页
+│   └── gh_api_push.py              github.com 被墙时的推送脚本
+├── skills/                         ★ 可复用技能
+│   ├── README.md                   技能索引 + 真机探测方法速查
+│   ├── android-adb-connect/        连接 + 诊断 + 设备画像 + Kiosk 探测
+│   ├── android-apk-build-no-studio/  无 Android Studio 手工构建 APK
+│   └── github-push-when-blocked/   github.com 被墙时的推送绕行
 └── assets/
     ├── phone-screenshot.png         设备主屏截图
     ├── kiosk-01 ~ 06*.png           Kiosk 全流程关键截图
@@ -209,6 +219,23 @@ jiushouji-adb-apk2027/
 - [ ] 按任务书开发真正的 Kiosk 应用（**用原生 View，避开 WebView**）
 - [ ] 加入崩溃自恢复（利用 framework 软重启后重新广播 BOOT_COMPLETED 的特性）
 - [ ] 批量部署流程验证（多台设备的 ADB 授权 + Device Owner 设置）
+
+---
+
+## 可复用技能
+
+本项目沉淀了 3 个技能，放在 [`skills/`](skills/)，**都可以直接套用到其他旧安卓设备**。
+详见 [`skills/README.md`](skills/README.md)。
+
+| 技能 | 解决什么问题 |
+|---|---|
+| [`android-adb-connect`](skills/android-adb-connect/SKILL.md) | 「连不上手机」的三层定位法、零风险权限试探、白牌机识别、Kiosk 可行性探测 |
+| [`android-apk-build-no-studio`](skills/android-apk-build-no-studio/SKILL.md) | 没有 Android Studio / SDK / Gradle 时，怎么手工打出可安装的 APK |
+| [`github-push-when-blocked`](skills/github-push-when-blocked/SKILL.md) | `github.com` 被墙、`git push` 失败时，怎么用 GitHub API 通道把改动推上去 |
+
+> 附带脚本：[`tools/gh_api_push.py`](tools/gh_api_push.py) —— 走 GitHub Git Data API 推送，
+> 支持中文路径与二进制文件。**本项目最后几次提交就是用它推上去的**
+>（因为 `github.com` 被间歇性阻断，而 `api.github.com` 正常）。
 
 ---
 

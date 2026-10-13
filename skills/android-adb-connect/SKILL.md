@@ -303,6 +303,57 @@ cat /sys/devices/system/cpu/cpu1/online    # 0 = 该核被关
 **优先用无害包试探**（动态壁纸、演示用包），别拿真正要动的目标去试。
 试探完记得把无害包恢复原状（本例中它本来就没被改成功）。
 
+#### Kiosk 全流程验证清单（Android 5.1 实测跑通）
+
+用户要往设备上装"开机自启 + 防退出"的应用时，按这 8 步逐项验证：
+
+| # | 验证项 | 命令 / 判定 |
+|---|---|---|
+| 1 | 能否安装 | `adb install -r app.apk` → `Success`；检查 `abi=armeabi-v7a` |
+| 2 | 是否处于 stopped 状态 | `dumpsys package <pkg> \| grep 'User 0'` → `stopped=true notLaunched=true` |
+| 3 | 启动一次清除 stopped | `am start -n <pkg>/.MainActivity` → 再查应为 `stopped=false` |
+| 4 | 能否接管桌面 | 按 Home → 焦点变成 `android/com.android.internal.app.ResolverActivity` 即弹出了选择器 |
+| 5 | 开机自启 | `adb reboot` → 等 boot_completed → 查 `logcat -d \| grep BOOT_COMPLETED` |
+| 6 | Device Owner | `dpm set-device-owner <pkg>/.AdminReceiver` → `Success: Device owner set to package ...` |
+| 7 | LockTask 锁定 | 应用调 `startLockTask()` 后，按 Home/Back 应**无法离开** |
+| 8 | 卸载保护 | `pm uninstall <pkg>` → `Failure [DELETE_FAILED_DEVICE_POLICY_MANAGER]` |
+
+**⚠️ 三个必踩的坑**：
+
+1. **`am broadcast` 在 5.1 不支持 `-p`**，报 `Error: Unknown option: -p`。必须用 `-n` 指定组件：
+   ```bash
+   am broadcast -a android.intent.action.BOOT_COMPLETED -n <pkg>/.BootReceiver
+   ```
+2. **Device Owner 不可逆**。只能恢复出厂设置清除，且**恢复出厂会清掉 ADB 授权密钥**
+   → 重启后 `adb devices` 变回 `unauthorized`，需要人工在设备上点一次「允许」。
+   如果只是想验证，**先准备好自毁手段**（让测试 APK 带一个调 `wipeData()` 的按钮），测完自己恢复。
+3. **`pm disable-user` 不可用**（见上），所以**没法自动干掉原桌面** →
+   装完会有 2 个 HOME，第一次按 Home 必须人工点「始终」。
+   要零人工，只能走 Device Owner + `addPersistentPreferredActivity`。
+
+#### 锁屏（Keyguard）在 5.1 上关不掉
+
+`settings put secure lockscreen.disabled 1` **实测无效**（写进去了但锁屏照旧）。
+`DevicePolicyManager.setKeyguardDisabled()` 是 API 23+，5.1 用不了。
+
+→ 应用侧只能靠 Window flags：
+```java
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+        | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+        | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+        | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+```
+无密码锁屏（滑动解锁）时 `FLAG_DISMISS_KEYGUARD` 有效。
+
+#### framework 软重启是天然的容错机制
+
+实测：SurfaceFlinger 看门狗 abort 会导致 Android framework 软重启
+（`system_server` PID 变化，内核不重启，adb 不断线）。
+**重启后系统会重新广播 `BOOT_COMPLETED`** → 注册了该广播的应用会被自动拉起。
+
+→ 给 Kiosk 应用的建议：**即使已经是默认桌面，也务必保留 `BOOT_COMPLETED` 接收器**，
+这是免费的崩溃自恢复。
+
 ### 屏幕朝向与传感器坐标系
 
 `ro.sf.hwrotation = 180`（面板在机壳内倒装）**不一定**导致传感器轴向翻转。
