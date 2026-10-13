@@ -58,7 +58,7 @@ adb shell am start -n com.example.jiushouji/.MainActivity
 | 品牌 | `alps`（MTK 公版方案） |
 | Android | **5.1 Lollipop / API 21** |
 | SoC | MediaTek **MT6582**（4×Cortex-A7 @ 1.3 GHz） |
-| **CPU 实际在线** | ⚠️ **只有 1 核，且停在 598 MHz** |
+| **CPU 实际在线** | ✅ hotplug 正常：空闲 1 核 @598 MHz，**负载时 4 核全开 @1.3 GHz** |
 | **ABI** | ⚠️ **仅 `armeabi-v7a`**（无 64 位） |
 | RAM / 存储 | 1.93 GB / 16 GB（`/data` 剩余 13.1 G） |
 | 屏幕 | 720×1280 @ 280dpi = **411×731 dp**，竖屏 |
@@ -133,7 +133,16 @@ jiushouji-adb-apk2027/
 │   ├── sensorservice.txt
 │   ├── dumpsys-battery.txt
 │   ├── dumpsys-media-camera.txt
-│   └── wm-size.txt / wm-density.txt
+│   ├── wm-size.txt / wm-density.txt
+│   ├── cpu-hotplug-test-result.txt       ★ CPU 负载复测完整输出
+│   ├── cpu-hotplug-governor-config.txt   ★ hotplug governor 全部参数
+│   ├── dstate-threads.txt                ★ 7 个 D 状态内核线程（loadavg 真相）
+│   ├── shell-permissions.txt             ★ shell 被授予的 66 条权限
+│   ├── dumpsys-package-shell.txt
+│   ├── dpm-usage.txt
+│   └── dpm-set-device-owner-probe.txt
+├── tools/
+│   └── cpu-hotplug-test.sh         可复跑的 CPU 热插拔测试脚本
 ├── skills/
 │   └── android-adb-connect/        连接 + 诊断 + 设备画像 流程
 └── assets/
@@ -146,10 +155,13 @@ jiushouji-adb-apk2027/
 
 | 问题 | 状态 |
 |---|---|
-| 4 核只开 1 核，频率停在最低档 | ⏳ 待跑负载复测定性 |
-| `/proc/loadavg` 读数异常（值不变） | ✅ 已确认为内核计数问题，勿用该指标 |
+| CPU 空闲只 1 核 | ✅ **已查清：非故障**。负载下 4 核全开 @1.3 GHz，已复现两次 |
+| `/proc/loadavg` 基线恒为 ~7 | ✅ **已查清**：7 个 MTK 内核线程长期 D 状态垫高基线，非计数错误 |
+| `pm disable-user` 全部被拒 | ✅ **已查清**：shell 无 `CHANGE_COMPONENT_ENABLED_STATE`，禁用原桌面不可行 |
+| `dpm set-device-owner` 是否可用 | ✅ **已查清**：shell 有 `MANAGE_DEVICE_ADMINS`，权限检查通过 |
 | 声明有指南针但无磁力计硬件 | ✅ 已确认，代码必须判空 |
 | 声明有前置摄像头但只有 1 个摄像头 | ✅ 已确认，需按单摄设计 |
+| 设备端没有 `sed`（但有 `grep`） | ✅ 已确认，脚本别用 `sed` |
 | 序列号是 MTK 占位值，不唯一 | ✅ 已确认，禁用作用设备标识 |
 
 ---
@@ -159,9 +171,10 @@ jiushouji-adb-apk2027/
 - [x] 确认 adb 可连接并授权
 - [x] 完整设备画像与平台溯源
 - [x] 产出 APK 开发指南
-- [ ] 实机验证「4 核只开 1 核」成因
-- [ ] 实测 `pm disable-user com.android.launcher3` 替换桌面
-- [ ] 实测 Device Owner + LockTask 的锁定效果
+- [x] 实机验证「4 核只开 1 核」成因 → **hotplug 正常，非故障**
+- [x] 实测 `pm disable-user com.android.launcher3` → **权限不足，不可行**
+- [x] 实测 `dpm set-device-owner` 权限 → **通过**
+- [ ] 实测 Device Owner + LockTask 的锁定效果（需一个带 `DeviceAdminReceiver` 的 APK）
 - [ ] 实机 `adb reboot` 验证开机自启
 - [ ] 第一个可用的开机自启 APK 原型
 

@@ -15,7 +15,7 @@
 | 2 | **只有 `armeabi-v7a`**，无 arm64 / 无 x86 | 带 native 库的三方 SDK 必须提供 armeabi-v7a，否则 `UnsatisfiedLinkError` |
 | 3 | **没有任何 Google 服务** | 禁用 Firebase / FCM / Play Services / Google Maps / SafetyNet / Play 内更新 |
 | 4 | **WebView 版本 37（2014 年 8 月）** | H5 必须写 ES5，禁用 ES6+、`fetch`、CSS Grid、CSS 变量 |
-| 5 | **CPU 只有 1 核在线，且停在 598 MHz** | 单线程性能约等于 2013 年低端机的一半，别写重计算 |
+| 5 | **CPU 空闲 1 核 @598 MHz，有负载时 4 核全开 @1.3 GHz** | 冷启动阶段只有 1 核，别把重活放在启动路径上 |
 | 6 | **RAM 1.93 GB** | 内存预算保守，大图要压缩 |
 | 7 | **屏幕 720×1280 @ 280dpi = 411×731 dp** | 按 411dp 宽设计 |
 | 8 | **`targetSdkVersion` 建议锁 21~22** | 规避后续 API 的行为变更（权限、后台限制等） |
@@ -49,8 +49,9 @@
 | 项目 | 值 |
 |---|---|
 | SoC | MediaTek **MT6582**（ARMv7，4×Cortex-A7，最高 1.3 GHz） |
-| CPU 在线核心 | ⚠️ **只有 1 个**（`present=0-3`，`online=0`） |
-| 调频 | governor = `hotplug`；档位 `1300 / 1196 / 1040 / 747.5 / 598 MHz`；实测停在 598 MHz |
+| CPU 在线核心 | ✅ **hotplug 工作正常**：空闲 1 核，**有负载时 4 核全开**（已实测复现） |
+| 调频 | governor = `hotplug`；档位 `1300 / 1196 / 1040 / 747.5 / 598 MHz`；空闲 598 MHz，负载升到 1300 MHz |
+| 热插拔配置 | `is_cpu_hotplug_disable=0`、`cpu_num_limit=4`、`cpu_up_threshold=90`、`cpu_rush_boost_num=4`、`cpu_input_boost_num=2` |
 | ABI | `armeabi-v7a`, `armeabi`（**`abilist64` 为空**） |
 | RAM | **2027880 kB ≈ 1.93 GB**（空闲约 1.5 GB） |
 | 存储 | eMMC 16 GB；`/data` 13.2 G（剩余 13.1 G） |
@@ -306,17 +307,54 @@ public class BootReceiver extends BroadcastReceiver {
 
 **设置默认桌面的可用手段（本机实测）**：
 
-| 手段 | 本机可用性 |
+| 手段 | 本机实测结论 |
 |---|---|
-| `cmd package set-home-activity` | ❌ **不可用**，本机 Android 5.1 **没有 `cmd` 命令**（6.0 才有） |
-| `pm set-home-activity` | ❌ **不存在**，`pm` 子命令列表里没有 |
-| `pm disable-user --user 0 com.android.launcher3` | ⚠️ **理论上可行，需实机验证**（对 system app 的禁用权限在 5.1 上不保证） |
-| `am start -a android.intent.action.MAIN -c android.intent.category.HOME` | ✅ 会弹出桌面选择器，人工点一次即可 |
-| 方案 C 的 `dpm set-device-owner` | ✅ **实测可用**，设完 Device Owner 后可直接 `addPersistentPreferredActivity` 固定桌面 |
+| `cmd package set-home-activity` | ❌ **不可用** —— 本机 Android 5.1 **没有 `cmd` 命令**（6.0 才引入） |
+| `pm set-home-activity` | ❌ **不存在** —— `pm` 子命令列表里没有这一项 |
+| `pm disable-user --user 0 com.android.launcher3` | ❌ **实测不可行** —— `SecurityException: Permission Denial: attempt to change component state from pid=…, uid=2000`。shell 用户**没有** `CHANGE_COMPONENT_ENABLED_STATE` 权限（详见下方） |
+| `am start -a android.intent.action.MAIN -c android.intent.category.HOME` | ⚠️ **会弹出桌面选择器，必须人工点一次「始终」**。当前系统只有 Launcher3 一个 HOME，所以现在调用它只是回桌面；等你的 APK 装上、变成第 2 个 HOME 后才会弹选择器 |
+| 方案 C 的 `dpm set-device-owner` | ✅ **实测权限检查通过** —— shell 有 `MANAGE_DEVICE_ADMINS`，用不存在的组件试探返回的是 `Unknown admin`（而非权限拒绝）。设成 Device Owner 后可调 `addPersistentPreferredActivity` **免人工**固定桌面 |
 
-**✅ 优点**：最可靠，开机必进自己界面。
+#### ⚠️ 关于 `pm disable-user` 的实测细节（重要）
+
+用真实存在的包试探，**两次都失败**：
+
+```bash
+$ adb shell pm disable-user --user 0 com.android.galaxy4      # 无害的动态壁纸包
+Error: java.lang.SecurityException: Permission Denial:
+       attempt to change component state from pid=2814, uid=2000, package uid=10027
+
+$ adb shell pm disable-user --user 0 com.android.launcher3    # 目标包
+Error: java.lang.SecurityException: Permission Denial:
+       attempt to change component state from pid=2912, uid=2000, package uid=10005
+```
+
+报错是**权限检查先于包特定逻辑**触发的，所以结论对**任何包**都成立。
+
+**根因**：shell 包（uid 2000）被授予的 66 条权限里**没有** `CHANGE_COMPONENT_ENABLED_STATE`。
+（完整清单见 [`../raw/shell-permissions.txt`](../raw/shell-permissions.txt)）
+
+**但 shell 有这些有用的权限**：
+
+| 权限 | 用途 |
+|---|---|
+| ✅ `MANAGE_DEVICE_ADMINS` | → `dpm set-device-owner` 可用 |
+| ✅ `SET_PREFERRED_APPLICATIONS` | 有设置默认应用的权限，**但 5.1 上没有命令行接口能调用它** |
+| ✅ `WRITE_SECURE_SETTINGS` | → `settings put secure …` 可用 |
+| ✅ `INSTALL_PACKAGES` / `DELETE_PACKAGES` | 装/卸载 |
+| ✅ `INJECT_EVENTS` | 模拟输入 |
+| ✅ `FORCE_STOP_PACKAGES` | 强停应用 |
+| ✅ `DUMP` | `dumpsys` |
+| ❌ `CHANGE_COMPONENT_ENABLED_STATE` | **没有** → 禁用组件不可行 |
+| ❌ `REBOOT` | 没有（但 `adb reboot` 走 adb 协议，不受影响） |
+
+> 💡 **产线批量部署的关键结论**：因为无法禁用原桌面，装完 APK 后系统里会有**两个 HOME**，
+> 第一次按 Home 会弹选择器，**必须人工点一次「始终」**。
+> 想做到**全自动、零人工**，只能走**方案 C（Device Owner）**。
+
+**✅ 优点**：不依赖广播，开机必进自己界面。
 **⚠️ 注意**：`stateNotNeeded="true"` 让系统在崩溃重启时能重新拉起；
-但**声明为 Home 后，按 Home 键就回不到原桌面了**——这是预期行为。
+但**一旦设为默认桌面，按 Home 键就回不到原桌面了**——这是预期行为。
 
 ---
 
@@ -385,13 +423,18 @@ startLockTask();
 部署侧（安装脚本）：
     1. adb install -r app.apk
     2. adb shell am start -n <包名>/.MainActivity     ← ★ 清除 stopped 状态，必须做
-    3. adb shell am start -a android.intent.action.MAIN \
-                     -c android.intent.category.HOME  ← 触发桌面选择，人工点「始终」
-    4.（可选，强锁定）adb shell dpm set-device-owner <包名>/.MyDeviceAdminReceiver
+    3. adb shell dpm set-device-owner <包名>/.MyDeviceAdminReceiver
+                                                     ← ★ 实测权限可用；设完可免人工固定桌面
+    4. 应用内调 addPersistentPreferredActivity() 把桌面钉死
+       （若跳过第 3 步，则退回人工：am start -c HOME 让用户点一次「始终」）
 ```
 
 这套组合下：开机 → 系统启动 → 你的 App 作为 Home 被拉起 → 界面直接出现。
 即使 `BOOT_COMPLETED` 因为 `stopped` 状态没生效，方案 B 也能兜住。
+
+> ⚠️ **批量部署注意**：因为 `pm disable-user` 不可用，**没法自动干掉原桌面**。
+> 不做 Device Owner 的话，每台机器都要人工点一次「始终」。
+> 要零人工，**必须走 Device Owner**——而且要在设备**还没登录任何账号之前**做。
 
 ---
 
@@ -488,27 +531,48 @@ adb uninstall com.example.jiushouji
 
 ## 7. 性能预算
 
-设备实际性能远低于 MT6582 的理论值——**4 核只开 1 核，且停在 598 MHz**。
+### 7.1 实测：CPU 热插拔行为（已复现两次）
 
-### 7.1 参考基线
+| 状态 | `online` | 当前频率 |
+|---|---|---|
+| 空闲 | `0`（**1 核**） | 598 MHz |
+| 施加 8 个忙循环 4 秒后 | `0-3`（**4 核全开**） | 1300 MHz |
+| 施加负载 10 秒后 | `0-3`（4 核） | 1300 MHz |
+| 释放负载 4 秒后 | `0-2`（**正在逐步关核**） | 598 MHz |
+
+**结论：hotplug 完全正常，不是故障。**
+`is_cpu_hotplug_disable = 0`、`cpu_num_limit = 4`。
+空闲关到 1 核是 MTK hotplug governor 的标准省电行为。
+
+**对开发的真实影响**：
+
+- ✅ **重负载下 4 核可用**，不必按单核设计
+- ⚠️ **但冷启动阶段往往只有 1 核**（应用刚起来时还没达到 `cpu_up_threshold = 90`）
+  → **别把重活放在启动路径上**，先出界面再异步加载
+- ⚠️ **多核唤醒有延迟**：`cpu_up_avg_times = 10`、`sampling_rate = 30000`（30 ms 采样）
+  → 突发计算会先在 1 核上跑一小段，达到 `cpu_rush_threshold = 98` 才冲到 4 核
+- ℹ️ 触摸输入会触发 `cpu_input_boost_num = 2`（临时升到 2 核）
+
+### 7.2 参考基线
 
 | 指标 | 建议目标 |
 |---|---|
-| 冷启动 | < 3 秒 |
+| 冷启动 | < 3 秒（**启动路径按单核预算**） |
 | 界面帧率 | 稳定 30 fps 即可，别追求 60 |
 | 单次网络请求超时 | ≥ 15 秒 |
 | 图片解码 | 单张 ≤ 1080p，且必须采样压缩 |
 
-### 7.2 优化建议
+### 7.3 优化建议
 
-- **主线程绝对不要做 IO / 网络 / 大量计算**，1 核机器上卡一下就是几秒
+- **启动路径（`Application.onCreate` / 首屏）按单核设计**，重活丢到后台线程延后做
+- **主线程绝对不要做 IO / 网络 / 大量计算**
 - **图片**：用 `BitmapFactory.Options.inSampleSize` 压缩；避免加载超过屏幕分辨率的图
 - **列表**：用 `RecyclerView` 但别做复杂 item 动画；列表项数量大时考虑分页
 - **避免**：`ObjectAnimator` 复杂动画、`SurfaceView` 高帧率绘制、大量 `findViewById`
 - **R8/ProGuard 必须开**，减少方法数能显著改善冷启动
-- **别指望多线程加速**：只有 1 核在线，多线程只会增加调度开销
+- **多线程可以用**（负载下 4 核会全开），但**并行度别设太高**——唤醒核心本身有开销
 
-### 7.3 内存
+### 7.4 内存
 
 - 总 RAM 1.93 GB，但系统本身占一部分，应用实际可用约 1 GB
 - 避免 `android:largeHeap="true"`（在这台机器上没多少余量可借）
@@ -597,8 +661,10 @@ ping  netstat  cp  mv  rm  ls  date  reboot  grep
 设备端 **没有** 这些命令（写了会失败）：
 
 ```
-cmd（Android 6+ 才有）  su  head  nproc  tar  curl  wget  toybox  busybox
+cmd（Android 6+ 才有）  su  sed  head  nproc  tar  curl  wget  toybox  busybox
 ```
+
+> 注意 `grep` **有**、但 `sed` **没有**——这个组合容易踩坑（常见写法 `... | sed -n '/x/,/y/p'` 会直接失败）。
 
 ### 常用操作
 
@@ -650,13 +716,40 @@ adb shell settings put system screen_off_timeout 2147483647
 | 声明有前置摄像头但只有 1 个 | 前后摄逻辑错乱 | 用 `getNumberOfCameras()` 遍历 |
 | 无 GMS | Firebase / Maps 崩溃 | 彻底不用 Google 依赖 |
 | WebView 37 | H5 白屏 / 语法报错 | 写 ES5 + polyfill |
-| 只有 1 核 @ 598 MHz | 界面卡顿、超时 | 精简逻辑，主线程零阻塞 |
+| CPU 空闲只有 1 核 | 误以为性能极差 | **负载下 4 核全开**（已实测复现）；启动路径仍按单核预算 |
+| `pm disable-user` 全部失败 | 无法禁用原桌面 | shell 无 `CHANGE_COMPONENT_ENABLED_STATE`；改走 Device Owner |
+| 设备端没有 `sed` | 管道脚本报错 | 用 `grep` / `awk` 替代 |
 | `hwrotation=180` | 理论上可能导致传感器坐标翻转 | **实测加速度计正常**，无需特殊处理；但锁竖屏更稳 |
 | 无中文输入法 | 中文输不进去 | 自带软键盘或允许英文 |
 | 无 `cmd` 命令 | `cmd package ...` 全失败 | 用 `pm` / `am` 替代 |
-| 无 `head` 命令 | 管道取前几行失败 | 用 `grep` / `sed` |
-| `/proc/loadavg` 读数异常 | 显示负载 7+ 但实际空闲 | **别用 loadavg 判断负载**，用 `top` |
+| 无 `head` 命令 | 管道取前几行失败 | 用 `grep` 替代 |
+| `/proc/loadavg` 基线恒为 ~7 | 误判为负载高 | 由 7 个 MTK 内核线程的 D 状态垫高，属平台固有（见 §11.1） |
 | 序列号是占位值 | 多台设备 ID 冲突 | 首启生成 UUID 存本地 |
+
+### 11.1 关于 `/proc/loadavg` 恒为 ~7（已查清）
+
+早期观察：负载平均恒显示 `7.13 / 7.17 / 7.19`，而 `top` 显示 CPU 几乎全空闲，
+一度被误判为「内核计数异常」。
+
+**实测查清真相**：系统里有 **7 个长期处于 `D`（不可中断睡眠）状态的内核线程**：
+
+```
+pmic_thread_kth    电源管理线程
+bat_thread_kthr    电池线程
+hang_detect        死机检测
+wdtk-0  wdtk-1  wdtk-2  wdtk-3    看门狗线程（4 个）
+```
+
+这些都是 MTK 平台的标准内核线程，**D 状态是正常现象**（阻塞在等待硬件中断/信号量），
+但它们会被计入 loadavg，把基线永久垫高到 ≈7。
+
+**所以 loadavg 不是坏的，而是基线被污染了**：
+
+- ❌ 不能直接读绝对值判断应用负载（7.13 是正常的空闲值）
+- ✅ 可以做**增量对比**：施加负载后确实从 7.13 涨到 8.34
+- ✅ 要精确看 CPU 利用率，用 `top` 或 `/proc/stat` 两次采样求差
+
+原始证据：[`../raw/dstate-threads.txt`](../raw/dstate-threads.txt)
 
 ---
 

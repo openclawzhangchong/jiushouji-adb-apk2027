@@ -1,0 +1,114 @@
+Receiver Resolver Table:
+  Non-Data Actions:
+      android.intent.action.BUGREPORT_FINISHED:
+        25327fe1 com.android.shell/.BugreportReceiver filter 29b788ec
+          Action: "android.intent.action.BUGREPORT_FINISHED"
+
+Registered ContentProviders:
+  com.android.shell/android.support.v4.content.FileProvider:
+    Provider{27d3106 com.android.shell/android.support.v4.content.FileProvider}
+
+ContentProvider Authorities:
+  [com.android.shell]:
+    Provider{27d3106 com.android.shell/android.support.v4.content.FileProvider}
+      applicationInfo=ApplicationInfo{24e1e3c7 com.android.shell}
+
+Key Set Manager:
+  [com.android.shell]
+      Signing KeySets: 1
+
+Packages:
+  Package [com.android.shell] (3e4535c4):
+    userId=2000 gids=[]
+    sharedUser=SharedUserSetting{3a7ecdf4 android.uid.shell/2000}
+    pkg=Package{976391d com.android.shell}
+    codePath=/system/priv-app/Shell
+    resourcePath=/system/priv-app/Shell
+    legacyNativeLibraryDir=/system/priv-app/Shell/lib
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    versionCode=21 targetSdk=21
+    versionName=5.1-1691725749
+    applicationInfo=ApplicationInfo{24e1e3c7 com.android.shell}
+    flags=[ SYSTEM HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP PRIVILEGED ]
+    pkgFlagsEx=[ ]
+    dataDir=/data/data/com.android.shell
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2023-06-19 15:49:37
+    firstInstallTime=2023-06-19 15:49:37
+    lastUpdateTime=2023-06-19 15:49:37
+    signatures=PackageSignatures{162b5792 [2b5a472d]}
+    permissionsFixed=false haveGids=true installStatus=1
+    pkgFlags=[ SYSTEM HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP PRIVILEGED ]
+    User 0:  installed=true hidden=false stopped=false notLaunched=false enabled=0
+
+Shared users:
+  SharedUser [android.uid.shell] (3a7ecdf4):
+    userId=2000 gids=[3002, 1028, 1015, 1023, 3008]
+    grantedPermissions:
+      android.permission.ACCESS_CONTENT_PROVIDERS_EXTERNALLY
+      android.permission.BLUETOOTH_STACK
+      android.permission.GET_ACCOUNTS
+      android.permission.SIGNAL_PERSISTENT_PROCESSES
+      android.permission.RETRIEVE_WINDOW_TOKEN
+      android.permission.DELETE_CACHE_FILES
+      android.permission.READ_INPUT_STATE
+      android.permission.STOP_APP_SWITCHES
+      android.permission.WRITE_CONTACTS
+      android.permission.SET_KEYBOARD_LAYOUT
+      android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+      android.permission.WRITE_CALENDAR
+      android.permission.ACCESS_NETWORK_STATE
+      android.permission.ACCESS_COARSE_LOCATION
+      android.permission.DELETE_PACKAGES
+      android.permission.DEVICE_POWER
+      android.permission.CHANGE_CONFIGURATION
+      android.permission.ACCESS_SURFACE_FLINGER
+      android.permission.ACCESS_FINE_LOCATION
+      android.permission.CLEAR_APP_USER_DATA
+      android.permission.WRITE_USER_DICTIONARY
+      android.permission.BROADCAST_STICKY
+      android.permission.FORCE_STOP_PACKAGES
+      android.permission.WRITE_SECURE_SETTINGS
+      android.permission.WRITE_MEDIA_STORAGE
+      android.permission.BIND_APPWIDGET
+      android.permission.GET_DETAILED_TASKS
+      android.permission.DUMP
+      android.permission.SET_PROCESS_LIMIT
+      android.permission.SET_SCREEN_COMPATIBILITY
+      android.permission.READ_EXTERNAL_STORAGE
+      android.permission.MANAGE_DEVICE_ADMINS
+      android.permission.EXPAND_STATUS_BAR
+      android.permission.GRANT_REVOKE_PERMISSIONS
+      android.permission.INTERACT_ACROSS_USERS
+      android.permission.INTERNAL_SYSTEM_WINDOW
+      android.permission.READ_CONTACTS
+      android.permission.READ_USER_DICTIONARY
+      android.permission.READ_CALENDAR
+      android.permission.INTERACT_ACROSS_USERS_FULL
+      android.permission.READ_FRAME_BUFFER
+      android.permission.REAL_GET_TASKS
+      android.permission.SET_ORIENTATION
+      android.permission.SEND_SMS
+      android.permission.INJECT_EVENTS
+      android.permission.SET_ALWAYS_FINISH
+      android.permission.FORCE_BACK
+      android.permission.RETRIEVE_WINDOW_CONTENT
+      android.permission.FRAME_STATS
+      android.permission.SET_DEBUG_APP
+      android.permission.UPDATE_APP_OPS_STATS
+      android.permission.REORDER_TASKS
+      android.permission.WRITE_SETTINGS
+      android.permission.SET_PREFERRED_APPLICATIONS
+      android.permission.SET_ANIMATION_SCALE
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.MANAGE_USERS
+      android.permission.SET_ACTIVITY_WATCHER
+      android.permission.BACKUP
+      android.permission.INSTALL_PACKAGES
+      android.permission.BLUETOOTH
+      android.permission.KILL_BACKGROUND_PROCESSES
+      android.permission.INSTALL_LOCATION_PROVIDER
+      android.permission.BATTERY_STATS
+      android.permission.CALL_PHONE
+      android.permission.ACCESS_WIFI_STATE

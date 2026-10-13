@@ -1,0 +1,7 @@
+   33  1   0% D     1      0K      0K     root     pmic_thread_kth
+   56  0   0% D     1      0K      0K     root     hang_detect
+   77  0   0% D     1      0K      0K     root     bat_thread_kthr
+   81  0   0% D     1      0K      0K     root     wdtk-0
+   82  1   0% D     1      0K      0K     root     wdtk-1
+   83  0   0% D     1      0K      0K     root     wdtk-2
+   84  0   0% D     1      0K      0K     root     wdtk-3

@@ -1,0 +1,1 @@
+Error: java.lang.SecurityException: Permission Denial: attempt to change component state from pid=2912, uid=2000, package uid=10005

@@ -1,0 +1,82 @@
+############ 1. 基线（空闲） ############
+present   = 0-3
+possible  = 0-3
+  online    = 0
+  cur_freq  = 598000 kHz
+  cpu1      = 0
+  cpu2      = 0
+  cpu3      = 0
+  stat      = cpu  35601 804 27636 1227560 558 217 64 0 0 0
+  loadavg   = 7.63 7.40 7.27 1/752 2861
+  governor  = hotplug
+  min_freq  = 598000 kHz
+/data/local/tmp/cpu-hotplug-test.sh[40]: cat: /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: Permission denied
+  max_freq  =  kHz
+  avail     = 1300000 1196000 1040000 747500 598000 
+
+############ 2. hotplug governor 参数 ############
+cpu_down_avg_times
+cpu_down_differential
+cpu_input_boost_enable
+cpu_input_boost_num
+cpu_num_base
+cpu_num_limit
+cpu_rush_avg_times
+cpu_rush_boost_enable
+cpu_rush_boost_num
+cpu_rush_threshold
+cpu_rush_tlp_times
+cpu_up_avg_times
+cpu_up_threshold
+down_differential
+ignore_nice_load
+io_is_busy
+is_cpu_hotplug_disable
+powersave_bias
+sampling_down_factor
+sampling_rate
+sampling_rate_min
+up_threshold
+  up_threshold = 85
+  sampling_rate = 30000
+
+############ 3. 内核命令行 ############
+/data/local/tmp/cpu-hotplug-test.sh[54]: cat: /proc/cmdline: Permission denied
+
+############ 4. 施加负载（8 个忙循环） ############
+  已启动 PID: 2869 2870 2871 2872 2873 2874 2875 2876
+
+--- 负载 4 秒后 ---
+  online    = 0-3
+  cur_freq  = 1300000 kHz
+  cpu1      = 1
+  cpu2      = 1
+  cpu3      = 1
+  stat      = cpu  37202 805 27653 4643957 492 217 64 0 0 0
+  loadavg   = 8.46 7.57 7.33 15/760 2883
+
+--- 负载 10 秒后 ---
+  online    = 0-3
+  cur_freq  = 1300000 kHz
+  cpu1      = 1
+  cpu2      = 1
+  cpu3      = 1
+  stat      = cpu  39628 806 27662 4643957 492 217 64 0 0 0
+  loadavg   = 9.54 7.81 7.41 13/760 2890
+
+############ 5. 释放负载 ############
+--- 释放 4 秒后 ---
+  online    = 0-2
+  cur_freq  = 598000 kHz
+  cpu1      = 1
+  cpu2      = 1
+  cpu3      = 0
+  stat      = cpu  39636 807 27676 3481696 512 217 64 0 0 0
+  loadavg   = 9.34 7.80 7.41 1/752 2897
+
+############ 6. 尝试手动拉起 cpu1 ############
+  （预期：shell 用户无权限写入 sysfs）
+/data/local/tmp/cpu-hotplug-test.sh[92]: can't create /sys/devices/system/cpu/cpu1/online: Permission denied
+  写入失败（权限不足），shell 无法手动控制热插拔
+
+DONE
