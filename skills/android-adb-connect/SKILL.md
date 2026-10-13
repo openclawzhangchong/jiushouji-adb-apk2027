@@ -199,6 +199,48 @@ MTK 的 `hotplug` governor 空闲时会关核，**某些 ODM 固件只留 1 核*
 - 无任何 `com.google.*` 包
 - `ro.serialno` 是 `0123456789ABCDEF` 之类的占位值
 
+### 判断这台设备能不能做「开机自启 / Kiosk 终端」
+
+用户要往设备上装自启 APK 时，先探这几项，直接决定方案选哪条：
+
+```powershell
+# 命令是否存在（Android 5.1 没有 cmd！）
+& $adb shell "command -v dpm"          # 有 → Device Owner / Kiosk 可行
+& $adb shell "command -v screenrecord"
+
+# 当前有没有 Device Owner / Device Admin
+& $adb shell "dumpsys device_policy"
+#   Enabled Device Admins (User 0): 后面为空 → 还能设 Device Owner
+
+# pm 支持哪些子命令（5.1 上【没有】 set-home-activity）
+& $adb shell pm
+
+# 屏幕超时（做常亮要改）
+& $adb shell "settings get system screen_off_timeout"
+```
+
+**Android 5.1 上的关键结论（实测）**：
+
+| 结论 | 影响 |
+|---|---|
+| **没有 `cmd` 命令**（6.0 才引入） | `cmd package set-home-activity` 用不了，只能用 `pm` / `am` |
+| **`pm` 没有 `set-home-activity`** | 换桌面得靠声明 HOME + `am start` 触发选择器，或 `pm disable-user` 原桌面 |
+| **`dpm` 存在** | 可 `dpm set-device-owner <组件>` 做真正的 Kiosk 锁定 |
+| `dpm set-device-owner` 要求设备无已登录账号 | **趁设备还是全新的时候做，登录账号后就设不了了** |
+| **应用装完处于 `stopped` 状态** | 收不到 `BOOT_COMPLETED`，**必须 `am start` 启动一次**才能自启 |
+
+### 屏幕朝向与传感器坐标系
+
+`ro.sf.hwrotation = 180`（面板在机壳内倒装）**不一定**导致传感器轴向翻转。
+实测方法：让设备平放，读加速度计：
+
+```powershell
+& $adb shell "dumpsys sensorservice" | Select-String 'ACCELEROMETER'
+# z ≈ +9.8~10 且 x/y ≈ 0 → 坐标系正常，没有翻转
+```
+
+本机实测 `(0.1, -0.2, 10.0)` → 正常。**别想当然认为倒装屏一定翻轴，实测为准。**
+
 ## 三层判读速查
 
 | 现象 | 层 | 处理 |
