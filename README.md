@@ -51,6 +51,7 @@ adb shell am start -n com.example.jiushouji/.MainActivity
 |---|---|---|
 | **[07 · 开发任务书](docs/07-开发任务书.md)** | **程序员 / 项目经理** | ★★★ **可直接下发的任务书**：硬约束清单、功能要求、参考代码、13 项验收标准 |
 | **[08 · 复核与勘误记录](docs/08-复核与勘误记录.md)** | **所有人** | ★ **站挑剔角度复查全部结论**：4 处有错已修正、5 处证据加强、1 处因果降级 |
+| **[09 · 麦克风与PC语音桥](docs/09-麦克风与PC语音桥.md)** | **所有人 / 程序员** | ★★★ **麦克风数据面实测落地**：`AudioRecord` 满速 32000B/s、熄屏 `PARTIAL_WAKE_LOCK` 续流、平板自己外放的声学自测方法论，以及 `adb reverse --list` 不可用 / `--ez` 只认 true/false / `offline`≠等点授权 三个 adb 坑。**实现不在本仓库**，在 [`jiushouji-yuyin-gaizao`](https://github.com/openclawzhangchong/jiushouji-yuyin-gaizao) |
 | **[06 · Kiosk 可行性实测](docs/06-Kiosk可行性实测.md)** | **决策者 / 程序员** | ★★ **自建 APK 真机全流程验证**：安装 / 桌面接管 / 开机自启 / Device Owner / LockTask 锁定 |
 | **[02 · APK 开发指南](docs/02-APK开发指南.md)** | **程序员** | ★ 硬件/软件规格、编译配置、外设陷阱、**开机自启方案**、性能预算、自检清单 |
 | [01 · 设备评估报告](docs/01-设备评估报告.md) | 所有人 | 设备身份、平台识别、完整规格、能力边界 |
@@ -80,6 +81,7 @@ adb shell am start -n com.example.jiushouji/.MainActivity
 | **ABI** | ⚠️ **仅 `armeabi-v7a`**（无 64 位） |
 | RAM / 存储 | 1.93 GB / 16 GB（`/data` 剩余 13.1 G） |
 | 屏幕 | 720×1280 @ 280dpi = **411×731 dp**，竖屏 |
+| **麦克风 / 外放** | ✅ 均实测可用（[09](docs/09-麦克风与PC语音桥.md)）：采麦可满速 **32000 B/s** 连续上行，熄屏靠 `PARTIAL_WAKE_LOCK` 不断流 |
 | **WebView** | ⚠️ **37**（2014 年 8 月） |
 | Google 服务 | ❌ 无 |
 | Root | ❌ 无 |
